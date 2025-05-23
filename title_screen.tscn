@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddp6q3h8a60wb"]
+
+[ext_resource type="Texture2D" uid="uid://blbgp6uvnf5jj" path="res://-AC-_Evolution_of_Parkour_-_Assassins_Creed_Unity_RooftopNavigation_1415412408.jpg" id="1_v6p8y"]
+[ext_resource type="FontFile" uid="uid://iskrobymxo6f" path="res://GamersDemoBoldItalic.ttf" id="2_ak2if"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ak2if"]
+texture = ExtResource("1_v6p8y")
+modulate_color = Color(0.560955, 0.560955, 0.560955, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1s85s"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ak2if")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -112.0
+offset_right = 213.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 9
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_1s85s")
+text = "Start Game
+"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_1s85s")
+text = "Settings
+"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_1s85s")
+text = "Quit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.0
+offset_top = 126.0
+offset_right = 96.0
+offset_bottom = 278.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_ak2if")
+theme_override_font_sizes/font_size = 50
+text = "Serein"
