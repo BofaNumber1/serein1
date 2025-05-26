@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://ddp6q3h8a60wb"]
 
 [ext_resource type="Texture2D" uid="uid://blbgp6uvnf5jj" path="res://-AC-_Evolution_of_Parkour_-_Assassins_Creed_Unity_RooftopNavigation_1415412408.jpg" id="1_v6p8y"]
-[ext_resource type="FontFile" uid="uid://iskrobymxo6f" path="res://GamersDemoBoldItalic.ttf" id="2_ak2if"]
+[ext_resource type="Texture2D" uid="uid://y70uww6a0my5" path="res://ChatGPT Image May 27, 2025, 09_42_51 AM.png" id="2_ak2if"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ak2if"]
 texture = ExtResource("1_v6p8y")
 modulate_color = Color(0.560955, 0.560955, 0.560955, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1s85s"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0.555376, 0.10657, 0.086802, 1)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
@@ -53,6 +53,10 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_1s85s")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1s85s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1s85s")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1s85s")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1s85s")
 text = "Start Game
 "
@@ -62,6 +66,10 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_1s85s")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1s85s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1s85s")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1s85s")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1s85s")
 text = "Settings
 "
@@ -71,19 +79,28 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_1s85s")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_1s85s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1s85s")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1s85s")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1s85s")
 text = "Quit"
 
-[node name="Label" type="Label" parent="."]
+[node name="Logo" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Logo"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -61.0
-offset_top = 126.0
-offset_right = 96.0
-offset_bottom = 278.0
+offset_left = 80.0
+offset_top = -50.0
+offset_right = 1075.0
+offset_bottom = 263.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_ak2if")
-theme_override_font_sizes/font_size = 50
-text = "Serein"
+texture = ExtResource("2_ak2if")
+expand_mode = 1
+stretch_mode = 5
