@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddp6q3h8a60wb"]
+[gd_scene load_steps=6 format=3 uid="uid://ddp6q3h8a60wb"]
 
+[ext_resource type="Script" uid="uid://bqtjlptnmtr7k" path="res://title_screen.gd" id="1_ig5kc"]
 [ext_resource type="Texture2D" uid="uid://blbgp6uvnf5jj" path="res://-AC-_Evolution_of_Parkour_-_Assassins_Creed_Unity_RooftopNavigation_1415412408.jpg" id="1_v6p8y"]
 [ext_resource type="Texture2D" uid="uid://y70uww6a0my5" path="res://ChatGPT Image May 27, 2025, 09_42_51 AM.png" id="2_ak2if"]
 
@@ -23,8 +24,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ig5kc")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Background Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,7 +50,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 9
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -61,7 +63,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1s85s")
 text = "Start Game
 "
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="Setting" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -74,7 +76,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_1s85s")
 text = "Settings
 "
 
-[node name="Button3" type="Button" parent="VBoxContainer"]
+[node name="Quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -104,3 +106,7 @@ grow_horizontal = 2
 texture = ExtResource("2_ak2if")
 expand_mode = 1
 stretch_mode = 5
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Setting" to="." method="_on_setting_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
