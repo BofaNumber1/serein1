@@ -35,6 +35,25 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ak2if")
 
+[node name="Logo" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Logo"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -229.0
+offset_top = -211.0
+offset_right = 1372.0
+offset_bottom = 425.0
+grow_horizontal = 2
+texture = ExtResource("2_ak2if")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -87,25 +106,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_1s85s")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_1s85s")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1s85s")
 text = "Quit"
-
-[node name="Logo" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="Logo"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 80.0
-offset_top = -50.0
-offset_right = 1075.0
-offset_bottom = 263.0
-grow_horizontal = 2
-texture = ExtResource("2_ak2if")
-expand_mode = 1
-stretch_mode = 5
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Setting" to="." method="_on_setting_pressed"]
