@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blbgp6uvnf5jj"
-path="res://.godot/imported/-AC-_Evolution_of_Parkour_-_Assassins_Creed_Unity_RooftopNavigation_1415412408.jpg-c963d5499cf7bfa283bec2251f98f1d2.ctex"
+uid="uid://y70uww6a0my5"
+path="res://.godot/imported/Serein.png-365eff0306022e3bffc6cdcbcd91d51e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://-AC-_Evolution_of_Parkour_-_Assassins_Creed_Unity_RooftopNavigation_1415412408.jpg"
-dest_files=["res://.godot/imported/-AC-_Evolution_of_Parkour_-_Assassins_Creed_Unity_RooftopNavigation_1415412408.jpg-c963d5499cf7bfa283bec2251f98f1d2.ctex"]
+source_file="res://Serein.png"
+dest_files=["res://.godot/imported/Serein.png-365eff0306022e3bffc6cdcbcd91d51e.ctex"]
 
 [params]
 
