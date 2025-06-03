@@ -12,7 +12,8 @@ func _process(delta):
 
 
 func _on_start_pressed() -> void:
-	
+	Globals.next_scene = "res://main_level.tscn"
+	get_tree().change_scene_to_packed(Globals.loading_screen)
 	print("Start Pressed")
 
 
