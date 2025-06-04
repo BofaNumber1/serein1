@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddp6q3h8a60wb"]
+[gd_scene load_steps=6 format=3 uid="uid://cwba8jx7uk26h"]
 
-[ext_resource type="Script" uid="uid://bqtjlptnmtr7k" path="res://title_screen.gd" id="1_ig5kc"]
-[ext_resource type="Texture2D" uid="uid://blbgp6uvnf5jj" path="res://MenuScreen.jpg" id="1_v6p8y"]
-[ext_resource type="Texture2D" uid="uid://y70uww6a0my5" path="res://Serein.png" id="2_ak2if"]
+[ext_resource type="Script" path="res://title_screen.gd" id="1_ig5kc"]
+[ext_resource type="Texture2D" path="res://MenuScreen.jpg" id="1_v6p8y"]
+[ext_resource type="Texture2D" path="res://Serein.png" id="2_ak2if"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ak2if"]
 texture = ExtResource("1_v6p8y")
