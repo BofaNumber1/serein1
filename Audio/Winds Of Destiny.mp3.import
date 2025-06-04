@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bheiuesvmypgl"
+path="res://.godot/imported/Winds Of Destiny.mp3-98344ab874becf7b1afbab34afff8b4e.mp3str"
+
+[deps]
+
+source_file="res://Audio/Winds Of Destiny.mp3"
+dest_files=["res://.godot/imported/Winds Of Destiny.mp3-98344ab874becf7b1afbab34afff8b4e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
