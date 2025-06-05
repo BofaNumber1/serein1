@@ -18,6 +18,8 @@ func _on_start_pressed() -> void:
 
 
 func _on_setting_pressed() -> void:
+	Globals.settings_screen = "res://Scenes/settings.tscn"
+	get_tree().change_scene_to_file("res://Scenes/settings.tscn")
 	print("Settings Pressed")
 
 
