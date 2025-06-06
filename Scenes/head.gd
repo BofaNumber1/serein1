@@ -22,3 +22,6 @@ func _input(event: InputEvent):
 		v.y -= (event.relative.x * sensitivity)
 		v.z -= (event.relative.y * sensitivity)
 		v.x = clamp(v.x, -40, 40)
+		chb3d.rotation_degrees.x -= event.relative.y * sensitivity
+		chb3d.rotation_degrees.x = clamp(chb3d.rotation_degrees.x, -40, 40)  # Limit up/down
+		chb3d.rotation_degrees.y -= event.relative.x * sensitivity  # Already handles left/right

@@ -24,4 +24,5 @@ func _on_setting_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
+	get_tree().quit()
 	print("Quit Pressed")
