@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgnfp1kgakkvv"]
 
-[ext_resource type="Script" uid="uid://d4e88yxtpft6s" path="res://Scripts/pause_screen.gd" id="1_fubm7"]
+[ext_resource type="Script" uid="uid://vjcedhuk2hm3" path="res://Scenes/pause_settings.gd" id="1_fubm7"]
 [ext_resource type="AudioStream" uid="uid://cexdafirge60b" path="res://Audio/Winds Of Destiny.mp3" id="2_6ch1c"]
 
 [node name="Settings" type="Control"]
@@ -51,7 +51,7 @@ popup/item_2/id = 2
 [node name="Back to menu" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Back to menu"
+text = "Back to game"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_6ch1c")

@@ -1,50 +1,60 @@
 extends Control
 
-var main_level = preload("res://Scenes/main_level.tscn")  # ✅ Proper preload
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+func _ready() -> void:
+	# Hide pause menu on start
+	visible = false
+	$AnimationPlayer.play("RESET")
+	get_tree().paused = false
+	# Store main level path
+	if not Globals.next_scene:
+		Globals.next_scene = get_tree().current_scene.scene_file_path
+		print("Stored main level: ", Globals.next_scene)
 
-signal resume_pressed
+func resume():
+	get_tree().paused = false
+	$AnimationPlayer.play_backwards("blur")
+	await $AnimationPlayer.animation_finished
+	visible = false
 
-# Call this when Resume button is pressed
+func pause():
+	visible = true
+	get_tree().paused = true
+	$AnimationPlayer.play("blur")
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause") and not event.is_echo():
+		if not get_tree().paused:
+			pause()
+		else:
+			resume()
+
 func _on_resume_pressed() -> void:
-	emit_signal("resume_pressed")
-	visible = false  # Hide pause screen UI
-	print("Resume Pressed")
+	resume()
 
-func _on_volume_value_changed(value):
-	AudioServer.set_bus_volume_db(0, value/10)
-
-
-func _on_mute_toggled(toggled_on):
-	AudioServer.set_bus_mute(0, toggled_on)
-
-
-func _on_resolutions_item_selected(index):
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	match index:
-		0:
-			DisplayServer.window_set_size(Vector2i(1920, 1080))
-		1:
-			DisplayServer.window_set_size(Vector2i(1600, 900))
-		2:
-			DisplayServer.window_set_size(Vector2i(1280, 720))
-
-func _on_start_pressed() -> void:
-	emit_signal("resume_pressed")
-	print("Resume Pressed")
-
-
+func _on_restart_pressed() -> void:
+	get_tree().paused = false
+	visible = false
+	get_tree().reload_current_scene()
 
 func _on_setting_pressed() -> void:
-	Globals.pause_settings = "res://Scenes/pause_settings.tscn"
-	print("Settings Pressed")
+	# Hide pause menu and unpause
+	visible = false
+	get_tree().paused = false
+	var error = get_tree().change_scene_to_file(Globals.pause_settings)
+	if error != OK:
+		print("Error loading pause settings: ", error)
+	else:
+		print("Pause settings loaded")
+
+func _on_back_to_main_menu_pressed() -> void:
+	visible = false
+	get_tree().paused = false
+	var error = get_tree().change_scene_to_file(Globals.title_screen)
+	if error != OK:
+		print("Error loading title screen: ", error)
 
 func _on_back_to_menu_pressed() -> void:
-	Globals.pause_screen = "res://Scenes/pause_screen.tscn"
-	print("Back to menu Pressed")
-
-func _on_quit_pressed() -> void:
-	Globals.title_screen = "res://Scenes/title_screen.tscn"
-	get_tree().change_scene_to_file("res://Scenes/title_screen.tscn")
-	print("Quit Pressed")
+	# For submenus; re-show pause menu
+	visible = true
+	get_tree().paused = true
+	print("Back to pause menu")
