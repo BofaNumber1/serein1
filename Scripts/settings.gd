@@ -21,7 +21,7 @@ func _on_resolutions_item_selected(index):
 
 
 func _on_back_to_menu_pressed() -> void:
-	Globals.pause_screen = "res://Scenes/pause_screen.tscn"
-	get_tree().change_scene_to_file("res://Scenes/pause_screen.tscn")
+	Globals.title_screen = "res://Scenes/title_screen.tscn"
+	get_tree().change_scene_to_file("res://Scenes/title_screen.tscn")
 	print("Back to menu Pressed")
 	

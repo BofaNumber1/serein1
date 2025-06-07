@@ -2,13 +2,13 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://bheiuesvmypgl"
-path="res://.godot/imported/Winds Of Destiny.mp3-98344ab874becf7b1afbab34afff8b4e.mp3str"
+uid="uid://cexdafirge60b"
+path="res://.godot/imported/Winds Of Destiny.mp3-d47f1cded9d40cf81487f818f53a6ee6.mp3str"
 
 [deps]
 
-source_file="res://Audio/Winds Of Destiny.mp3"
-dest_files=["res://.godot/imported/Winds Of Destiny.mp3-98344ab874becf7b1afbab34afff8b4e.mp3str"]
+source_file="res://Scripts/Winds Of Destiny.mp3"
+dest_files=["res://.godot/imported/Winds Of Destiny.mp3-d47f1cded9d40cf81487f818f53a6ee6.mp3str"]
 
 [params]
 
