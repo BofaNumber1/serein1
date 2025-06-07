@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxnlw6ln7c5fb"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gv5m4"]
+energy_multiplier = 27.48
+
+[sub_resource type="Sky" id="Sky_f3sb7"]
+sky_material = SubResource("ProceduralSkyMaterial_gv5m4")
+process_mode = 3
+
+[sub_resource type="Environment" id="Environment_fj7yv"]
+sky = SubResource("Sky_f3sb7")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 3.86
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 0.83
+tonemap_white = 4.75
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gv5m4"]
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fj7yv")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 1, 0, 0, 0, 1000, 0, 0, 0)
+mesh = SubResource("PlaneMesh_gv5m4")
+
+[node name="Wall" type="MeshInstance3D" parent="."]

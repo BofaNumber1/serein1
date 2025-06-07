@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cw2p288e3idco"
+path.s3tc="res://.godot/imported/main_character_world_scene_2.png-6214a72d7baab1a9a8376b9a2f36b210.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "18f14ad8546d9084f341661f700e70fc"
+}
+
+[deps]
+
+source_file="res://Images/main_character_world_scene_2.png"
+dest_files=["res://.godot/imported/main_character_world_scene_2.png-6214a72d7baab1a9a8376b9a2f36b210.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=1
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=1
+roughness/src_normal="res://main_character_world_scene_2.png"
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
