@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cwba8jx7uk26h"]
 
-[ext_resource type="Script" path="res://title_screen.gd" id="1_ig5kc"]
-[ext_resource type="Texture2D" path="res://MenuScreen.jpg" id="1_v6p8y"]
-[ext_resource type="Texture2D" path="res://Serein.png" id="2_ak2if"]
+[ext_resource type="Script" uid="uid://bqtjlptnmtr7k" path="res://Scripts/title_screen.gd" id="1_ig5kc"]
+[ext_resource type="Texture2D" uid="uid://blbgp6uvnf5jj" path="res://Images/MenuScreen.jpg" id="1_v6p8y"]
+[ext_resource type="Texture2D" uid="uid://y70uww6a0my5" path="res://Images/Serein.png" id="2_ak2if"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ak2if"]
 texture = ExtResource("1_v6p8y")
@@ -45,10 +45,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -229.0
-offset_top = -211.0
-offset_right = 1372.0
-offset_bottom = 425.0
+offset_left = 178.0
+offset_top = 25.0
+offset_right = 1779.0
+offset_bottom = 661.0
 grow_horizontal = 2
 texture = ExtResource("2_ak2if")
 expand_mode = 1
