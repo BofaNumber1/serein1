@@ -3,6 +3,7 @@ extends Control
 func _ready() -> void:
 	# Hide pause menu on start
 	visible = false
+	$AudioStreamPlayer.stream_paused
 	$AnimationPlayer.play("RESET")
 	get_tree().paused = false
 	# Store main level path
@@ -20,6 +21,7 @@ func pause():
 	visible = true
 	get_tree().paused = true
 	$AnimationPlayer.play("blur")
+	$AudioStreamPlayer.play()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause") and not event.is_echo():
@@ -30,6 +32,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_resume_pressed() -> void:
 	resume()
+	$AudioStreamPlayer.stop()
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
