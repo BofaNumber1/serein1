@@ -3,11 +3,11 @@ extends CharacterBody3D
 @onready var animation_tree: AnimationTree = $AnimationTree
 
 @export var blend_speed: float = 5.0
-@export var gravity: float = -40.0
+@export var gravity: float = -650.0
 @export var rotation_speed: float = 4.0
 @export var run_speed: float = 475.0
 @export var walk_speed: float = 225.0
-@export var jump_velocity: float = 25.0
+@export var jump_velocity: float = 300.0
 
 var current_idle_blend: float = 0.0
 var airborne_blend: float = 0.0

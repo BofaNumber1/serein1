@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bn4s0uttu2c8k"]
 
 [ext_resource type="Script" uid="uid://dsfpyve216rjd" path="res://Scripts/settings.gd" id="1_4geyq"]
-[ext_resource type="AudioStream" uid="uid://bheiuesvmypgl" path="res://Audio/Winds Of Destiny.mp3" id="2_i44u3"]
+[ext_resource type="AudioStream" uid="uid://cexdafirge60b" path="res://Audio/Winds Of Destiny.mp3" id="2_i44u3"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
