@@ -24,7 +24,7 @@ sky = SubResource("Sky_ha3dl")
 script = ExtResource("1_a2ia3")
 
 [node name="Player" parent="." instance=ExtResource("5_lwkuy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 246.305, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 110.46, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f3gli")

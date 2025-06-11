@@ -10,7 +10,12 @@ func _on_mute_toggled(toggled_on):
 
 
 func _on_resolutions_item_selected(index):
+	# Set the window mode first
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+
+	# Small delay to ensure window mode is applied before resizing
+	await get_tree().process_frame
+
 	match index:
 		0:
 			DisplayServer.window_set_size(Vector2i(1920, 1080))
@@ -18,6 +23,7 @@ func _on_resolutions_item_selected(index):
 			DisplayServer.window_set_size(Vector2i(1600, 900))
 		2:
 			DisplayServer.window_set_size(Vector2i(1280, 720))
+
 
 
 func _on_back_to_menu_pressed() -> void:
