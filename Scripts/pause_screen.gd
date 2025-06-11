@@ -61,3 +61,18 @@ func _on_back_to_menu_pressed() -> void:
 	visible = true
 	get_tree().paused = true
 	print("Back to pause menu")
+	
+func _on_quit_mouse_entered() -> void:
+	$Hover.play()
+
+
+func _on_resume_mouse_entered() -> void:
+	$Hover.play()
+
+
+func _on_restart_mouse_entered() -> void:
+	$Hover.play()
+
+
+func _on_setting_mouse_entered() -> void:
+	$Hover.play()

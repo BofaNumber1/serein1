@@ -43,6 +43,3 @@ mesh = SubResource("PlaneMesh_2jcip")
 shape = SubResource("WorldBoundaryShape3D_6l6h0")
 
 [node name="PauseScreen" parent="." instance=ExtResource("22_7wxy1")]
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 99.0092, 111.853)

@@ -1,7 +1,13 @@
 extends CharacterBody3D
 
-@onready var animation_tree: AnimationTree = $AnimationTree
+@export var sens := 0.1
+var twist_input := 0.0
+var pitch_input := 0.0
 
+
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var pivot = $CamRoot
+#@onready var sens = $CamRoot
 @export var blend_speed: float = 5.0
 @export var gravity: float = -650.0
 @export var rotation_speed: float = 4.0
@@ -13,6 +19,7 @@ var current_idle_blend: float = 0.0
 var airborne_blend: float = 0.0
 var is_sprinting: bool = false  # New variable to track sprint state
 
+
 func _physics_process(delta: float) -> void:
 	var move_direction = Vector3.ZERO
 	
@@ -23,7 +30,9 @@ func _physics_process(delta: float) -> void:
 		rotate_y(rotation_speed * delta)
 	if Input.is_action_pressed("right"):
 		rotate_y(-rotation_speed * delta)
-	
+	if Input.is_action_pressed("backward"):
+		move_direction -= transform.basis.z
+		
 	if Input.is_action_pressed("forward"):
 		move_direction = transform.basis.z
 	
@@ -77,3 +86,11 @@ func blend_fall_jump(delta: float) -> void:
 	animation_tree.set(
 		"parameters/BlendFallJump/blend_position", vertical_speed
 	)
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		rotate_y(deg_to_rad(-event.relative.x * sens))
+		pivot.rotate_x(deg_to_rad(event.relative.y * sens))
+		pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-90), deg_to_rad(45))
