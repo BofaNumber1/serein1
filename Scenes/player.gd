@@ -27,13 +27,13 @@ func _physics_process(delta: float) -> void:
 
 	# Movement input
 	if Input.is_action_pressed("forward"):
-		move_input -= Vector3.FORWARD
+		move_input.z += 1  # Forward: negative Z
 	if Input.is_action_pressed("backward"):
-		move_input += Vector3.BACK
+		move_input.z -= 1  # Backward: positive Z
 	if Input.is_action_pressed("left"):
-		move_input -= Vector3.LEFT
+		move_input.x += 1  # Left: negative X
 	if Input.is_action_pressed("right"):
-		move_input -= Vector3.RIGHT
+		move_input.x -= 1  # Right: positive X
 
 	is_sprinting = Input.is_action_pressed("sprint") and is_on_floor()
 
