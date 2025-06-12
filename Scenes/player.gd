@@ -58,13 +58,20 @@ func _physics_process(delta: float) -> void:
 	var on_floor = is_on_floor()
 	var is_falling = not on_floor and velocity.y < 0
 	var just_landed = on_floor and velocity.y == 0 and not is_moving
-
+	var is_not_falling = just_landed and velocity.y == 0
+	var jumping = velocity.y == 1
+	
+	
 	animation_tree.set("parameters/conditions/Idle", not is_moving and on_floor)
 	animation_tree.set("parameters/conditions/Walk", is_moving and not is_sprinting and on_floor)
 	animation_tree.set("parameters/conditions/Run", is_moving and is_sprinting and on_floor)
 	animation_tree.set("parameters/conditions/Falling", is_falling)
-	animation_tree.set("parameters/conditions/Landed", just_landed)
-
+	animation_tree.set("parameters/conditions/Landed", just_landed and is_not_falling)
+	animation_tree.set("parameters/conditions/Jumping", jumping)
+	
+	
+	
+	
 	blend_fov(delta)
 
 func blend_fov(delta: float) -> void:
