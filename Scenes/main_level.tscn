@@ -9,12 +9,12 @@
 panorama = ExtResource("2_a2ia3")
 energy_multiplier = 0.1
 
-[sub_resource type="Sky" id="Sky_ha3dl"]
+[sub_resource type="Sky" id="Sky_qbrl8"]
 sky_material = SubResource("PanoramaSkyMaterial_tqiex")
 
 [sub_resource type="Environment" id="Environment_f3gli"]
 background_mode = 2
-sky = SubResource("Sky_ha3dl")
+sky = SubResource("Sky_qbrl8")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2jcip"]
 
