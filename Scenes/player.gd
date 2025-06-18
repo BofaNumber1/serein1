@@ -49,18 +49,22 @@ func _physics_process(delta: float) -> void:
 
 	# Jump
 	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_velocity
+		if is_sprinting:
+			velocity.y = jump_velocity + 100  # You can tweak the bonus
+		else:
+			velocity.y = jump_velocity
+
 
 	move_and_slide()
 
 	# ---- Animation Logic ----
 	var is_moving = move_input.length_squared() > 0.01
 	var on_floor = is_on_floor()
-	var is_falling = not on_floor and velocity.y < 0
 	var just_landed = on_floor and velocity.y == 0 and not is_moving
 	var is_not_falling = just_landed and velocity.y == 0
-	var jumping = velocity.y == 1
-	var RunningJump = velocity.y ==1
+	var jumping = not is_on_floor() and velocity.y > 0
+	var is_falling = not is_on_floor() and velocity.y < 0
+	var RunningJump = velocity.y == jump_velocity + 100
 	
 	
 	animation_tree.set("parameters/conditions/Idle", not is_moving and on_floor)
@@ -69,7 +73,7 @@ func _physics_process(delta: float) -> void:
 	animation_tree.set("parameters/conditions/Falling", is_falling)
 	animation_tree.set("parameters/conditions/Landed", just_landed and is_not_falling)
 	animation_tree.set("parameters/conditions/Jumping", jumping)
-	animation_tree.set("parameters/conditions/RunningJump", jumping)
+	animation_tree.set("parameters/conditions/RunningJump", RunningJump and is_sprinting)
 
 
 	

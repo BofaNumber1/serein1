@@ -33,6 +33,7 @@ func _input(event: InputEvent) -> void:
 func _on_resume_pressed() -> void:
 	resume()
 	$AudioStreamPlayer.stop()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
