@@ -60,6 +60,7 @@ func _physics_process(delta: float) -> void:
 	var just_landed = on_floor and velocity.y == 0 and not is_moving
 	var is_not_falling = just_landed and velocity.y == 0
 	var jumping = velocity.y == 1
+	var RunningJump = velocity.y ==1
 	
 	
 	animation_tree.set("parameters/conditions/Idle", not is_moving and on_floor)
@@ -68,7 +69,9 @@ func _physics_process(delta: float) -> void:
 	animation_tree.set("parameters/conditions/Falling", is_falling)
 	animation_tree.set("parameters/conditions/Landed", just_landed and is_not_falling)
 	animation_tree.set("parameters/conditions/Jumping", jumping)
-	
+	animation_tree.set("parameters/conditions/RunningJump", jumping)
+
+
 	
 	
 	
