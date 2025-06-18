@@ -1,5 +1,11 @@
 extends Control
 
+func _ready():
+	$MarginContainer/VBoxContainer/Resolutions.clear()
+	$MarginContainer/VBoxContainer/Resolutions.add_item("1920 x 1080")
+	$MarginContainer/VBoxContainer/Resolutions.add_item("1600 x 900")
+	$MarginContainer/VBoxContainer/Resolutions.add_item("1280 x 720")	
+
 
 func _on_volume_value_changed(value):
 	AudioServer.set_bus_volume_db(0, value/10)
