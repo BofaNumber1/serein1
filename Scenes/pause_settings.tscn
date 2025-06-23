@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bgnfp1kgakkvv"]
+[gd_scene load_steps=6 format=3 uid="uid://bgnfp1kgakkvv"]
 
 [ext_resource type="Script" uid="uid://vjcedhuk2hm3" path="res://Scenes/pause_settings.gd" id="1_fubm7"]
 [ext_resource type="AudioStream" uid="uid://cexdafirge60b" path="res://Audio/Winds Of Destiny.mp3" id="2_6ch1c"]
+[ext_resource type="PackedScene" uid="uid://bwr13vwnir27q" path="res://Scenes/rain.tscn" id="2_mkg0i"]
+
+[sub_resource type="Gradient" id="Gradient_55kwv"]
+offsets = PackedFloat32Array(0.331169, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.752906, 0.00358516, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ksnr6"]
+gradient = SubResource("Gradient_55kwv")
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -11,6 +19,90 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fubm7")
+
+[node name="Parallex BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture1D_ksnr6")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = 602.0
+offset_top = -190.0
+offset_right = 1485.0
+offset_bottom = 31.0
+color = Color(0.435294, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = -449.0
+offset_top = 82.0
+offset_right = -134.0
+offset_bottom = 809.0
+color = Color(0.380392, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = -1090.0
+offset_top = -628.0
+offset_right = -503.0
+offset_bottom = -240.0
+color = Color(0.705882, 0, 0, 1)
+
+[node name="Rain" parent="." instance=ExtResource("2_mkg0i")]
+position = Vector2(954, 537)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Rain"]
+modulate = Color(0.595824, 0.603809, 0.597744, 1)
+position = Vector2(394, -814)
+scale = Vector2(0.685, 0.685)
+amount = 1225
+lifetime = 8.01
+speed_scale = 0.4
+randomness = 0.1
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(200, 1)
+direction = Vector2(9999, 0)
+spread = 180.0
+gravity = Vector2(-300, 300)
+initial_velocity_min = 179.95
+initial_velocity_max = 179.95
+angular_velocity_min = 48.55
+angular_velocity_max = 51.4
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+radial_accel_max = 100.0
+damping_min = 2.035
+damping_max = 2.035
+angle_min = -577.3
+angle_max = -359.7
+scale_amount_min = 3.0
+scale_amount_max = 4.0
+hue_variation_min = -0.91
+hue_variation_max = 1.0
+
+[node name="Camera2D2" type="Camera2D" parent="Rain"]
+position = Vector2(4, 0)
+scale = Vector2(1315.2, 739.8)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
