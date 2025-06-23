@@ -1,12 +1,12 @@
 extends CharacterBody3D
 
 @export var sens := 0.1
-@export var blend_speed: float = 5.0
-@export var gravity: float = -650.0
+@export var blend_speed: float = .980
+@export var gravity: float = -300.0
 @export var rotation_speed: float = 4.0
-@export var run_speed: float = 475.0
-@export var walk_speed: float = 225.0
-@export var jump_velocity: float = 310.0
+@export var run_speed: float = 30.0
+@export var walk_speed: float = 14.0
+@export var jump_velocity: float = 90.0
 
 @export var normal_fov: float = 70.0
 @export var sprint_fov: float = 90.0
