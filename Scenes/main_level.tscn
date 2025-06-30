@@ -1,20 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://dr386vthkuxg"]
+[gd_scene load_steps=9 format=3 uid="uid://y8bncrffdd4p"]
 
 [ext_resource type="Script" uid="uid://cdt6qw7gl1fog" path="res://Scripts/main_level.gd" id="1_a2ia3"]
 [ext_resource type="Texture2D" uid="uid://dounf8jgmc1kl" path="res://kloppenheim_02_puresky_2k.hdr" id="2_a2ia3"]
-[ext_resource type="PackedScene" uid="uid://dibvhemwm7yk1" path="res://Scenes/Timmy/Timmy.tscn" id="2_qbrl8"]
 [ext_resource type="PackedScene" uid="uid://da86a6e7mlo73" path="res://Scenes/pause_screen.tscn" id="22_7wxy1"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_tqiex"]
 panorama = ExtResource("2_a2ia3")
 energy_multiplier = 0.1
 
-[sub_resource type="Sky" id="Sky_qbrl8"]
+[sub_resource type="Sky" id="Sky_5erdv"]
 sky_material = SubResource("PanoramaSkyMaterial_tqiex")
 
 [sub_resource type="Environment" id="Environment_f3gli"]
 background_mode = 2
-sky = SubResource("Sky_qbrl8")
+sky = SubResource("Sky_5erdv")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2jcip"]
 
@@ -22,9 +21,6 @@ sky = SubResource("Sky_qbrl8")
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_a2ia3")
-
-[node name="Timmy" parent="." instance=ExtResource("2_qbrl8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 75.4133, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f3gli")
