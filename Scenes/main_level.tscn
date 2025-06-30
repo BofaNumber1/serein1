@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://y8bncrffdd4p"]
+[gd_scene load_steps=9 format=3 uid="uid://bqu3nnn7uic1y"]
 
 [ext_resource type="Script" uid="uid://cdt6qw7gl1fog" path="res://Scripts/main_level.gd" id="1_a2ia3"]
 [ext_resource type="Texture2D" uid="uid://dounf8jgmc1kl" path="res://kloppenheim_02_puresky_2k.hdr" id="2_a2ia3"]
