@@ -31,7 +31,7 @@ mesh = SubResource("PlaneMesh_hb2xm")
 shape = SubResource("WorldBoundaryShape3D_ak5v8")
 debug_color = Color(0.913725, 0, 0, 1)
 
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ak5v8")
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]

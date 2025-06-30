@@ -19,7 +19,8 @@ func _process(delta):
 
 func _on_start_pressed() -> void:
 	$Click.play()
-	Globals.next_scene = "res://World scene/3d_world.tscn"
+	Globals.next_scene = "res://Scenes/test_scene.tscn"
+	await get_tree().create_timer(1.0).timeout 
 	get_tree().change_scene_to_packed(Globals.loading_screen)
 	print("Start Pressed")
 
