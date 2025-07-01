@@ -16,7 +16,7 @@ warnings/check_angle_interpolation_type_conflicting=false
 [application]
 
 config/name="serein"
-run/main_scene="uid://ddp6q3h8a60wb"
+run/main_scene="uid://c7aembfta0vvx"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
