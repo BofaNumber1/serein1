@@ -4,6 +4,7 @@ extends CharacterBody3D
 @export var animation_tree: AnimationTree
 @export var animation_player: AnimationPlayer
 @onready var animation_state = animation_tree.get("parameters/playback")
+@onready var footstep = $footstep
 
 # Camera Target and Parent
 @export var camera_target: Node3D
@@ -82,13 +83,34 @@ func _physics_process(delta):
 
 	camera_smooth_follow(delta)
 
+var base_y = 40.0
+var base_z = -200.0
+
+@export var left_offset_x := 50.0# How far left (camera right) the player starts
+@export var lerp_speed := 1.0# How fast camera moves sideways
+
+var current_x_offset := 0.0
+
+func _ready():
+	current_x_offset = left_offset_x  # Start offset at left
+
 func camera_smooth_follow(delta):
 	var camera_T = camera_target.global_transform.basis.get_euler().y
-	var cam_offset = Vector3(0, 40, -200).rotated(Vector3.UP, camera_T)
+	# Determine target X offset based on movement
+	var target_x = left_offset_x if !anim_canmove else 0.0
+	# Smoothly interpolate current_x_offset toward target_x
+	current_x_offset = lerp(current_x_offset, target_x, lerp_speed * delta)
+	# Construct offset vector using current_x_offset
+	var offset = Vector3(current_x_offset, base_y, base_z)
+	offset = offset.rotated(Vector3.UP, camera_T)
+	# Smooth interpolation of camera position
 	var cam_speed = 250
 	var cam_timer = clamp(delta * cam_speed / 20.0, 0.0, 1.0)
+	
+	var desired_pos = global_transform.origin + offset
+	camera_parent.global_transform.origin = camera_parent.global_transform.origin.lerp(desired_pos, cam_timer)
 
-	camera_parent.global_transform.origin = camera_parent.global_transform.origin.lerp(
-		global_transform.origin + cam_offset,
-		cam_timer
-	)
+func player_sound():
+	#print("player is running")
+	footstep.playing = true
+	pass
