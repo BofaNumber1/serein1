@@ -1,6 +1,6 @@
 extends Node
 
-var loading_screen = preload("res://Scenes/3Dloading_screen.tscn")
+var loading_screen = preload("res://Scenes/Loading Screen/3Dloading_screen.tscn")
 var settings_screen : String = "res://Scenes/settings.tscn"
 var pause_settings : String = "res://Scenes/pause_settings.tscn"
 var next_scene : String = "res://Scenes/test_scene.tscn"

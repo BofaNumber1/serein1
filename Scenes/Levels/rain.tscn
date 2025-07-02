@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwr13vwnir27q"]
+
+[ext_resource type="Script" uid="uid://ceod7ncc0udyi" path="res://Scripts/rain.gd" id="1_l8yrx"]
+
+[node name="Rain" type="Node2D"]
+script = ExtResource("1_l8yrx")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(0.595824, 0.603809, 0.597744, 1)
+position = Vector2(971, -1095)
+scale = Vector2(0.685, 0.685)
+amount = 1225
+lifetime = 8.01
+speed_scale = 0.4
+randomness = 0.1
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(200, 1)
+direction = Vector2(9999, 0)
+spread = 180.0
+gravity = Vector2(-300, 300)
+initial_velocity_min = 179.95
+initial_velocity_max = 179.95
+angular_velocity_min = 48.55
+angular_velocity_max = 51.4
+linear_accel_min = 100.0
+linear_accel_max = 100.0
+radial_accel_max = 100.0
+damping_min = 2.035
+damping_max = 2.035
+angle_min = -577.3
+angle_max = -359.7
+scale_amount_min = 3.0
+scale_amount_max = 4.0
+hue_variation_min = -0.91
+hue_variation_max = 1.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(1920, 1080)

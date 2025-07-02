@@ -18,7 +18,8 @@ warnings/check_angle_interpolation_type_conflicting=false
 config/name="Serein"
 run/main_scene="uid://c7aembfta0vvx"
 config/features=PackedStringArray("4.4", "Forward Plus")
-boot_splash/image="uid://dgmx408uf75eg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://Images/SereinIcon.png"
 config/icon="uid://y70uww6a0my5"
 
 [autoload]

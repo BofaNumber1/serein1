@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://7vpmysv6700k"]
+
+[ext_resource type="Texture2D" uid="uid://dounf8jgmc1kl" path="res://kloppenheim_02_puresky_2k.hdr" id="1_50ct6"]
+[ext_resource type="PackedScene" uid="uid://dibvhemwm7yk1" path="res://Scenes/Timmy/Timmy.tscn" id="1_r5l72"]
+[ext_resource type="PackedScene" uid="uid://dub13vlfe452o" path="res://Scenes/Timmy/camera.tscn" id="2_50ct6"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hb2xm"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ak5v8"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hb2xm"]
+panorama = ExtResource("1_50ct6")
+energy_multiplier = 0.1
+
+[sub_resource type="Sky" id="Sky_50ct6"]
+sky_material = SubResource("PanoramaSkyMaterial_hb2xm")
+
+[sub_resource type="Environment" id="Environment_ak5v8"]
+background_mode = 2
+sky = SubResource("Sky_50ct6")
+
+[node name="TestScene" type="Node3D"]
+
+[node name="floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(5000, 0, 0, 0, 5000, 0, 0, 0, 5000, 0, 0, 0)
+mesh = SubResource("PlaneMesh_hb2xm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_ak5v8")
+debug_color = Color(0.913725, 0, 0, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ak5v8")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.573576, 0.45212, -0.68308, 0, 0.833886, 0.551937, 0.819152, -0.316578, 0.478297, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Timmy" parent="." node_paths=PackedStringArray("camera_target", "camera_parent", "actual_camera") instance=ExtResource("1_r5l72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 102.622, 0)
+camera_target = NodePath("../Camera/CameraTarget")
+camera_parent = NodePath("../Camera")
+actual_camera = NodePath("../Camera/CameraTarget/SpringArm3D/Camera3D")
+shake_strength = 5.0
+walk_speed = 100.0
+sprint_speed = 200.0
+
+[node name="Camera" parent="." instance=ExtResource("2_50ct6")]
+
+[node name="Camera3D" parent="Camera/CameraTarget/SpringArm3D" index="0"]
+transform = Transform3D(-0.881897, 0, 0.471443, 0.0433672, 0.99576, 0.0811241, -0.469444, 0.0919883, -0.878157, 0, 146.197, -161.109)
+
+[editable path="Camera"]
