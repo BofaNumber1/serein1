@@ -16,7 +16,7 @@ var tips = [
 	"Make sure you're having fun!",
 ]
 
-var scene_to_load: PackedScene = preload("res://Scenes/test_scene.tscn")
+var scene_to_load: PackedScene = preload("res://Scenes/Levels/test_scene.tscn")
 
 func _ready():
 	randomize()

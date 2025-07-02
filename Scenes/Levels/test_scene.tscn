@@ -22,7 +22,7 @@ sky = SubResource("Sky_50ct6")
 [node name="TestScene" type="Node3D"]
 
 [node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(5000, 0, 0, 0, 5000, 0, 0, 0, 5000, 0, 0, 0)
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
 mesh = SubResource("PlaneMesh_hb2xm")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor"]
@@ -45,7 +45,6 @@ camera_parent = NodePath("../Camera")
 actual_camera = NodePath("../Camera/CameraTarget/SpringArm3D/Camera3D")
 shake_strength = 5.0
 walk_speed = 100.0
-sprint_speed = 200.0
 
 [node name="Camera" parent="." instance=ExtResource("2_50ct6")]
 

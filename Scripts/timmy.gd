@@ -30,7 +30,7 @@ var bob_timer := 0.0
 
 # Camera FOV Zoom
 @export var normal_fov := 70.0
-@export var walk_fov := 75.0  # New walk FOV
+@export var walk_fov := 75.0
 @export var sprint_fov := 85.0
 @export var fov_lerp_speed := 8.0
 
@@ -49,7 +49,7 @@ var vertical = 0.0
 
 # Movement speeds
 @export var walk_speed := 55.0
-@export var sprint_speed := 85.0
+@export var sprint_speed := 650.0
 @export var jump_velocity := 200.0
 @export var gravity := -500.0
 
@@ -60,11 +60,14 @@ func _process(delta):
 	horizontal = Input.get_axis("right", "left")
 	vertical = Input.get_axis("backward", "forward")
 
-	var root_pos = animation_tree.get_root_motion_position()
-	var current_rotation = animation_tree.get_root_motion_rotation_accumulator().inverse() * get_quaternion()
-	root_velocity = current_rotation * root_pos / delta
-	var root_rotation = animation_tree.get_root_motion_rotation()
-	set_quaternion(get_quaternion() * root_rotation)
+	if anim_canmove:
+		var root_pos = animation_tree.get_root_motion_position()
+		var current_rotation = animation_tree.get_root_motion_rotation_accumulator().inverse() * get_quaternion()
+		root_velocity = current_rotation * root_pos / delta
+		var root_rotation = animation_tree.get_root_motion_rotation()
+		set_quaternion(get_quaternion() * root_rotation)
+	else:
+		root_velocity = Vector3.ZERO  # Prevent movement while idle
 
 	# Handle FOV zoom with walking check
 	var target_fov = normal_fov
@@ -112,6 +115,12 @@ func _physics_process(delta):
 	var horizontal_velocity = direction * speed
 	velocity.x = horizontal_velocity.x
 	velocity.z = horizontal_velocity.z
+
+	# Stop drift when idle
+	if !anim_canmove:
+		velocity.x = 0.0
+		velocity.z = 0.0
+
 	move_and_slide()
 
 	# Smooth rotation
@@ -129,7 +138,6 @@ func camera_smooth_follow(delta):
 
 	# Basic offset (up + back)
 	var offset = Vector3(current_x_offset, base_y, base_z).rotated(Vector3.UP, camera_T)
-
 	var desired_pos = global_transform.origin + offset
 
 	# Start with no offset
@@ -149,7 +157,7 @@ func camera_smooth_follow(delta):
 		bob_timer += delta * bob_speed
 		shake_offset += Vector3(
 			sin(bob_timer),
-			abs(cos(bob_timer * 2.0)),  # Upward bounce only
+			abs(cos(bob_timer * 2.0)),
 			0
 		) * bob_strength
 	else:

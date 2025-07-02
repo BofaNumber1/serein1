@@ -36,7 +36,6 @@ actual_camera = NodePath("../Camera/CameraTarget/SpringArm3D/Camera3D")
 shake_strength = 5.5
 bob_strength = 3.0
 walk_speed = 100.0
-sprint_speed = 200.0
 
 [node name="Camera" parent="." instance=ExtResource("2_slj20")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.3208, -41.0481)
