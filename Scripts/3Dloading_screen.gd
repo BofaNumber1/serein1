@@ -10,6 +10,10 @@ var tips = [
 	"Use rooftops to evade guards.",
 	"Don't be afraid to slide under tables or swing off poles.",
 	"Remember to deliver your package!",
+	"Time to go on a water break!",
+	"Don't forget to sub to my yt channel ;)",
+	"Find parkour routes all across the city",
+	"Make sure you're having fun!",
 ]
 
 var scene_to_load: PackedScene = preload("res://Scenes/test_scene.tscn")

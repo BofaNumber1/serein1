@@ -28,18 +28,21 @@ sky = SubResource("Sky_50ct6")
 
 [node name="Loading Screen" type="Node3D"]
 
+[node name="Timmy" parent="." node_paths=PackedStringArray("camera_target", "camera_parent", "actual_camera") instance=ExtResource("1_7jh1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 102.622, 0)
+camera_target = NodePath("../Camera/CameraTarget")
+camera_parent = NodePath("../Camera")
+actual_camera = NodePath("../Camera/CameraTarget/SpringArm3D/Camera3D")
+shake_strength = 5.5
+bob_strength = 3.0
+walk_speed = 100.0
+sprint_speed = 200.0
+
 [node name="Camera" parent="." instance=ExtResource("2_4fc7d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.3208, -41.0481)
 
 [node name="Camera3D" parent="Camera/CameraTarget/SpringArm3D" index="0"]
 transform = Transform3D(-0.881897, 0, 0.471443, 0.0433672, 0.99576, 0.0811241, -0.469444, 0.0919883, -0.878157, 0, 146.197, -161.109)
-
-[node name="Timmy" parent="." node_paths=PackedStringArray("camera_target", "camera_parent") instance=ExtResource("1_7jh1r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 102.622, 0)
-camera_target = NodePath("../Camera/CameraTarget")
-camera_parent = NodePath("../Camera")
-walk_speed = 100.0
-sprint_speed = 200.0
 
 [node name="LoadingManager" type="Node3D" parent="."]
 script = ExtResource("1_4fc7d")
