@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://brnxnwd0gpf4w"]
+
+[ext_resource type="FontFile" uid="uid://d0ta1wssonr8p" path="res://Fonts/VeniteAdoremus-rgRBA.ttf" id="1_owiy1"]
+[ext_resource type="Script" uid="uid://fdg5rirt00f3" path="res://Scenes/UI/settings.gd" id="1_p46qs"]
+[ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="2_ma1v7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnc41"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbpxm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rqaq1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_osel2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c1r2n"]
+
+[node name="settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p46qs")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -48
+
+[node name="SettingsTitle" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("1_owiy1")
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_ma1v7")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lnc41")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tbpxm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_rqaq1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_osel2")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c1r2n")
+text = "Exit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
