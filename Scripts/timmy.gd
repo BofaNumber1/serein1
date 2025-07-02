@@ -109,6 +109,7 @@ func _physics_process(delta):
 	animation_tree.set("parameters/conditions/Run", is_sprinting)
 	animation_tree.set("parameters/conditions/Jump", is_jumping)
 	animation_tree.set("parameters/conditions/Walk", anim_canmove and !is_sprinting)
+	animation_tree.set("parameters/conditions/Beam", anim_canmove and is_sprinting and is_jumping)
 
 	# Movement
 	var speed = sprint_speed if is_sprinting else walk_speed

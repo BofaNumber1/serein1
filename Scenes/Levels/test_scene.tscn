@@ -38,17 +38,45 @@ environment = SubResource("Environment_ak5v8")
 transform = Transform3D(0.573576, 0.45212, -0.68308, 0, 0.833886, 0.551937, 0.819152, -0.316578, 0.478297, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Timmy" parent="." node_paths=PackedStringArray("camera_target", "camera_parent", "actual_camera") instance=ExtResource("1_r5l72")]
+[node name="Timmy" parent="." node_paths=PackedStringArray("animation_tree", "camera_target", "camera_parent", "actual_camera") instance=ExtResource("1_r5l72")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 102.622, 0)
+animation_tree = NodePath("AnimationTree")
 camera_target = NodePath("../Camera/CameraTarget")
 camera_parent = NodePath("../Camera")
 actual_camera = NodePath("../Camera/CameraTarget/SpringArm3D/Camera3D")
 shake_strength = 5.0
 walk_speed = 100.0
 
+[node name="Skeleton3D" parent="Timmy/AuxScene2/AuxScene/Node" index="0"]
+bones/0/position = Vector3(-2.0322, 61.8599, -7.0015)
+bones/0/rotation = Quaternion(0.0174057, -0.108004, 0.00383611, 0.993991)
+bones/1/rotation = Quaternion(0.144367, 0.0114756, -0.0456217, 0.988405)
+bones/2/rotation = Quaternion(0.022252, 0.00246813, -0.00537317, 0.999735)
+bones/3/rotation = Quaternion(0.0222644, 0.00233337, -0.00541443, 0.999735)
+bones/4/rotation = Quaternion(-0.080397, 0.0015501, 0.0142502, 0.99666)
+bones/5/rotation = Quaternion(-0.0732166, 0.0014474, 0.014261, 0.997213)
+bones/7/rotation = Quaternion(0.552348, 0.425148, -0.595722, 0.399095)
+bones/8/rotation = Quaternion(0.350421, -0.0385769, 0.143766, 0.924688)
+bones/9/rotation = Quaternion(-0.00632104, -0.00167753, 0.245578, 0.969355)
+bones/10/rotation = Quaternion(0.910132, 0.00066939, -0.363236, -0.199298)
+bones/11/rotation = Quaternion(0.0822418, 0.138396, -0.155587, 0.974616)
+bones/31/rotation = Quaternion(0.611758, -0.430293, 0.44317, 0.494166)
+bones/32/rotation = Quaternion(0.464801, 0.0174376, 0.0947656, 0.880157)
+bones/33/rotation = Quaternion(-0.00637857, 0.00180877, -0.314846, 0.94912)
+bones/34/rotation = Quaternion(0.162139, -0.107842, -0.021543, 0.980621)
+bones/55/rotation = Quaternion(0.0906245, 0.214986, 0.97104, -0.0514724)
+bones/56/rotation = Quaternion(-0.301461, -0.0901431, -0.0343846, 0.948585)
+bones/57/rotation = Quaternion(0.52724, -0.102141, 0.0598592, 0.841428)
+bones/58/rotation = Quaternion(0.340306, 0.0303637, -0.0113519, 0.939756)
+bones/60/rotation = Quaternion(-0.116567, 0.164124, 0.974304, 0.101033)
+bones/61/rotation = Quaternion(-0.315285, -0.0338928, -0.016485, 0.948249)
+bones/62/rotation = Quaternion(0.573042, 0.0473155, 0.135389, 0.806879)
+bones/63/rotation = Quaternion(0.35961, -0.0303367, 0.0112485, 0.932541)
+
 [node name="Camera" parent="." instance=ExtResource("2_50ct6")]
 
 [node name="Camera3D" parent="Camera/CameraTarget/SpringArm3D" index="0"]
 transform = Transform3D(-0.881897, 0, 0.471443, 0.0433672, 0.99576, 0.0811241, -0.469444, 0.0919883, -0.878157, 0, 146.197, -161.109)
 
+[editable path="Timmy"]
 [editable path="Camera"]
