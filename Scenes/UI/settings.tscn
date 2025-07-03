@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://brnxnwd0gpf4w"]
+[gd_scene load_steps=11 format=3 uid="uid://brnxnwd0gpf4w"]
 
 [ext_resource type="FontFile" uid="uid://d0ta1wssonr8p" path="res://Fonts/VeniteAdoremus-rgRBA.ttf" id="1_owiy1"]
 [ext_resource type="Script" uid="uid://fdg5rirt00f3" path="res://Scenes/UI/settings.gd" id="1_p46qs"]
 [ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="2_ma1v7"]
+[ext_resource type="AudioStream" uid="uid://cnuv4eayjw5d2" path="res://Audio/Click.ogg" id="2_n8st6"]
+[ext_resource type="AudioStream" uid="uid://de634hpemsamv" path="res://Audio/Hover.mp3" id="3_dkbde"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnc41"]
 
@@ -22,6 +24,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_p46qs")
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_n8st6")
+volume_db = 9.0
+pitch_scale = 1.03
+
+[node name="Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dkbde")
+volume_db = 10.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -65,4 +76,5 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_osel2")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_c1r2n")
 text = "Exit"
 
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

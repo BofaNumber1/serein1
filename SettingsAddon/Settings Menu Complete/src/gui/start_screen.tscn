@@ -1,0 +1,212 @@
+[gd_scene load_steps=17 format=3 uid="uid://byp5p7und0m8c"]
+
+[ext_resource type="Script" uid="uid://btaogjivp6k17" path="res://src/gui/start_screen.gd" id="1"]
+[ext_resource type="Theme" path="res://src/gui/default.theme" id="2"]
+[ext_resource type="Texture2D" uid="uid://d2j8h0t7hshhb" path="res://assets/prototype_textures/PNG/Green/texture_01.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://jwiq4ykwo6ex" path="res://assets/prototype_textures/PNG/Dark/texture_01.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dcqe1kldyv1fy" path="res://assets/prototype_textures/PNG/Orange/texture_01.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://crybkdflkm7at" path="res://assets/prototype_textures/PNG/Purple/texture_01.png" id="6"]
+[ext_resource type="PackedScene" uid="uid://c2xn6qmc53q68" path="res://src/gui/settings_menu.tscn" id="7"]
+[ext_resource type="Script" uid="uid://b3162yyrr8kqd" path="res://src/gui/fps_label.gd" id="10"]
+[ext_resource type="PackedScene" path="res://src/world/world_environment.tscn" id="11"]
+
+[sub_resource type="StandardMaterial3D" id="1"]
+albedo_color = Color(0.694118, 0.0745098, 0.0745098, 1)
+
+[sub_resource type="StandardMaterial3D" id="2"]
+albedo_texture = ExtResource("4")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="3"]
+albedo_texture = ExtResource("3")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="4"]
+albedo_texture = ExtResource("5")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="5"]
+albedo_texture = ExtResource("6")
+uv1_triplanar = true
+
+[sub_resource type="Animation" id="8"]
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/ViewportContainer/Viewport/Camera:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3, 0.034), Vector3(0, 2.5, 0.034), Vector3(-0.5, 2.5, 0.034), Vector3(0, 2.5, 0.034), Vector3(0, 3, 0.034)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jde42"]
+_data = {
+&"Camera": SubResource("8")
+}
+
+[node name="StartScreen" type="CanvasLayer"]
+script = ExtResource("1")
+level = "res://src/world/game.tscn"
+
+[node name="Background" type="Node3D" parent="."]
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+stretch = true
+
+[node name="Viewport" type="SubViewport" parent="Background/ViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera" type="Camera3D" parent="Background/ViewportContainer/Viewport"]
+transform = Transform3D(1, 0, 0, 0, 0.988196, 0.153193, 0, -0.153193, 0.988196, 0, 3, 0.034)
+current = true
+
+[node name="Level" type="CSGCombiner3D" parent="Background"]
+
+[node name="WallsAndFloor" type="CSGCombiner3D" parent="Background/Level"]
+material_override = SubResource("1")
+
+[node name="Floor" type="CSGBox3D" parent="Background/Level/WallsAndFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.19176)
+size = Vector3(20, 0.1, 20)
+material = SubResource("2")
+
+[node name="Wall" type="CSGBox3D" parent="Background/Level/WallsAndFloor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 6.06135, -14.1531)
+size = Vector3(20, 0.1, 12.1247)
+material = SubResource("3")
+
+[node name="Wall2" type="CSGBox3D" parent="Background/Level/WallsAndFloor"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -9.77744, 5.86845, -4.63139)
+size = Vector3(20, 0.1, 12.1247)
+material = SubResource("3")
+
+[node name="Wall3" type="CSGBox3D" parent="Background/Level/WallsAndFloor"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 9.89967, 5.86845, -4.63139)
+size = Vector3(20, 0.1, 12.1247)
+material = SubResource("3")
+
+[node name="Obstacles" type="CSGCombiner3D" parent="Background/Level"]
+calculate_tangents = false
+
+[node name="CSGBox" type="CSGBox3D" parent="Background/Level/Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.93763, 0.5, -6.61195)
+material = SubResource("4")
+
+[node name="CSGBox7" type="CSGBox3D" parent="Background/Level/Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.93763, 0.5, -4.61457)
+material = SubResource("4")
+
+[node name="CSGBox2" type="CSGBox3D" parent="Background/Level/Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.668553, 0.5, -11.5279)
+material = SubResource("4")
+
+[node name="CSGBox5" type="CSGBox3D" parent="Background/Level/Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5787, 0.5, -8.46302)
+material = SubResource("4")
+
+[node name="CSGBox6" type="CSGBox3D" parent="Background/Level/Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5787, 0.5, -6.33399)
+material = SubResource("4")
+
+[node name="CSGBox3" type="CSGBox3D" parent="Background/Level/Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64003, 0.5, -11.5279)
+material = SubResource("4")
+
+[node name="CSGBox4" type="CSGBox3D" parent="Background/Level/Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.71776, 0.5, -11.5279)
+material = SubResource("4")
+
+[node name="CSGPolygon" type="CSGPolygon3D" parent="Background/Level/Obstacles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -10)
+polygon = PackedVector2Array(0, 0, 0, 1, 2, 0, -0.0200983, -0.0553893)
+depth = 2.924
+material = SubResource("5")
+
+[node name="CSGPolygon2" type="CSGPolygon3D" parent="Background/Level/Obstacles"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.87446, 0, -12.8473)
+polygon = PackedVector2Array(0, 0, 0, 1, 2, 0, -0.0200983, -0.0553893)
+depth = 2.924
+material = SubResource("5")
+
+[node name="CSGPolygon3" type="CSGPolygon3D" parent="Background/Level/Obstacles"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -6.09203, 0, -5.80086)
+polygon = PackedVector2Array(0, 0, 0, 1, 2, 0, -0.0200983, -0.0553893)
+depth = 0.999
+material = SubResource("5")
+
+[node name="WorldEnvironment" parent="Background" instance=ExtResource("11")]
+
+[node name="FpsLabel" type="Label" parent="."]
+visible = false
+text = "FPS: 60"
+script = ExtResource("10")
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Title" type="RichTextLabel" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "Test Game"
+scroll_active = false
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StartGameBtn" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Start Game"
+
+[node name="SettingsBtn" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Settings"
+
+[node name="ExitBtn" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Exit"
+
+[node name="SettingsMenu" parent="." instance=ExtResource("7")]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jde42")
+}
+autoplay = "Camera"
+
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/StartGameBtn" to="." method="_on_StartGameBtn_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/SettingsBtn" to="." method="_on_SettingsBtn_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]
