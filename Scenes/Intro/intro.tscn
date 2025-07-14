@@ -59,7 +59,7 @@ _data = {
 }
 
 [sub_resource type="Gradient" id="Gradient_kloxg"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+colors = PackedColorArray(0.00392157, 0.0352941, 0.0509804, 1, 0.0196078, 0.0823529, 0.12549, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2p2mj"]
 gradient = SubResource("Gradient_kloxg")
@@ -68,8 +68,8 @@ gradient = SubResource("Gradient_kloxg")
 script = ExtResource("1_kloxg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1002, 532.25)
-scale = Vector2(0.675, 0.989352)
+position = Vector2(1002, 541)
+scale = Vector2(0.675, 0.554167)
 texture = ExtResource("2_2p2mj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

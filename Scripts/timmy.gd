@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var animation_player: AnimationPlayer
 @onready var animation_state = animation_tree.get("parameters/playback")
 @onready var footstep = $footstep
+@onready var idle1 = $IdleVoiceLine1
 
 # Camera Target and Parent
 @export var camera_target: Node3D
@@ -34,6 +35,16 @@ var bob_timer := 0.0
 @export var sprint_fov := 85.0
 @export var fov_lerp_speed := 8.0
 
+# Idle Voice Line Timer
+var idle_timer := 0.0
+@export var idle_trigger_time := 5.0     # Seconds before first voice line plays
+@export var idle1_interval := 10.0       # Seconds between voice lines
+var last_idle1_time := 0.0
+
+# Mouse Idle Timer
+var mouse_moved_timer := 0.0
+@export var mouse_idle_threshold := 0.3  # Seconds of no mouse movement before considered idle
+
 # Player Parameters
 var inputdir = Vector3()
 var direction = Vector3()
@@ -53,10 +64,27 @@ var vertical = 0.0
 @export var jump_velocity := 200.0
 @export var gravity := -500.0
 
+# Mouse sensitivity (assuming you have this)
+var mouse_sensitivity := 0.002
+var camera_pitch := 0.0
+var max_pitch := deg_to_rad(80)
+var min_pitch := deg_to_rad(-80)
+
 func _ready():
 	current_x_offset = left_offset_x
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		mouse_moved_timer = 0.0  # Reset mouse idle timer
+		camera_target.rotate_y(-event.relative.x * mouse_sensitivity)
+		camera_pitch = clamp(camera_pitch + event.relative.y * mouse_sensitivity, min_pitch, max_pitch)
+		camera_parent.rotation.x = camera_pitch
+
 
 func _process(delta):
+	mouse_moved_timer += delta
+
 	horizontal = Input.get_axis("right", "left")
 	vertical = Input.get_axis("backward", "forward")
 
@@ -69,11 +97,11 @@ func _process(delta):
 	else:
 		root_velocity = Vector3.ZERO  # Prevent movement while idle
 
-	# Handle FOV zoom with walking check
+	# FOV zoom
 	var target_fov = normal_fov
 	if is_sprinting:
 		target_fov = sprint_fov
-	elif anim_canmove and !is_sprinting:
+	elif anim_canmove:
 		target_fov = walk_fov
 
 	actual_camera.fov = lerp(actual_camera.fov, target_fov, fov_lerp_speed * delta)
@@ -90,10 +118,9 @@ func _physics_process(delta):
 	else:
 		anim_canmove = false
 
-	# Sprint toggle — checks if sprint key is pressed and player is moving
 	is_sprinting = Input.is_action_pressed("sprint") and inputdir != Vector3.ZERO
 
-	# Handle Jump
+	# Jumping
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump") and !anim_canmove:
 			velocity.y = jump_velocity
@@ -103,13 +130,17 @@ func _physics_process(delta):
 	else:
 		velocity.y += gravity * delta
 
-	# Animation Conditions
+	# Vault condition — sprinting and holding E ("vault" input action)
+	var is_vaulting = is_sprinting and Input.is_action_pressed("vault") 
+
+	# Animation conditions (including vault)
 	animation_tree.set("parameters/conditions/startmove", anim_canmove)
 	animation_tree.set("parameters/conditions/Idle", !anim_canmove)
 	animation_tree.set("parameters/conditions/Run", is_sprinting)
 	animation_tree.set("parameters/conditions/Jump", is_jumping)
 	animation_tree.set("parameters/conditions/Walk", anim_canmove and !is_sprinting)
 	animation_tree.set("parameters/conditions/Beam", anim_canmove and is_sprinting and is_jumping)
+	animation_tree.set("parameters/conditions/Vault", is_vaulting)
 
 	# Movement
 	var speed = sprint_speed if is_sprinting else walk_speed
@@ -117,7 +148,6 @@ func _physics_process(delta):
 	velocity.x = horizontal_velocity.x
 	velocity.z = horizontal_velocity.z
 
-	# Stop drift when idle
 	if !anim_canmove:
 		velocity.x = 0.0
 		velocity.z = 0.0
@@ -128,8 +158,21 @@ func _physics_process(delta):
 	if anim_canmove:
 		rotation.y = lerp_angle(rotation.y, atan2(direction.x, direction.z), turn_speed * delta)
 
+	# Idle voice line logic — only plays when not moving (ignores mouse movement)
+	if horizontal == 0 and vertical == 0 and is_on_floor():
+		idle_timer += delta
+		if idle_timer >= idle_trigger_time:
+			var now = Time.get_ticks_msec()
+			if (now - last_idle1_time > idle1_interval * 1000) and idle1 and !idle1.playing:
+				print("Idle voice line played")
+				idle1.play()
+				last_idle1_time = now
+	else:
+		idle_timer = 0.0
+
 	camera_smooth_follow(delta)
 
+# === ORIGINAL CAMERA FUNCTION from your very first script ===
 func camera_smooth_follow(delta):
 	var camera_T = camera_target.global_transform.basis.get_euler().y
 
