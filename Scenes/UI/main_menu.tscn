@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b22jdskd287dw"]
+[gd_scene load_steps=28 format=3 uid="uid://b22jdskd287dw"]
 
 [ext_resource type="PackedScene" uid="uid://bqu3nnn7uic1y" path="res://Scenes/Levels/intro_background.tscn" id="1_gih0s"]
 [ext_resource type="AudioStream" uid="uid://cc7w7wwph8w3r" path="res://Audio/Gameprompts - ShoogaBooga.wav" id="2_gih0s"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://y70uww6a0my5" path="res://Images/Serein.png" id="4_wqme5"]
 [ext_resource type="Script" uid="uid://ceod7ncc0udyi" path="res://Scripts/rain.gd" id="5_jewm6"]
 [ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="6_cejvf"]
+[ext_resource type="FontFile" uid="uid://cs8s0frmb8h3x" path="res://Fonts/ModernWarfare-OV7KP.ttf" id="7_wqme5"]
 [ext_resource type="Texture2D" uid="uid://c20cm3xde8llv" path="res://Scenes/Timmy/cover_issue_31_en_US-removebg-preview.png" id="9_lrjdf"]
 
 [sub_resource type="GDScript" id="GDScript_opfnp"]
@@ -161,6 +162,21 @@ theme = SubResource("Theme_opfnp")
 texture = ExtResource("4_wqme5")
 expand_mode = 1
 
+[node name="Label4" type="Label" parent="."]
+modulate = Color(0.419813, 0.419813, 0.419813, 1)
+anchors_preset = -1
+anchor_right = 0.01
+offset_left = 63.0
+offset_top = 97.0
+offset_right = 472.86
+offset_bottom = 172.0
+theme_override_fonts/font = ExtResource("7_wqme5")
+theme_override_font_sizes/font_size = 20
+text = "my favs: 
+Instagram: @kitzchh 
+Tiktok: @fwkye_
+Roblox: @ST4RREI"
+
 [node name="Shadow" type="TextureRect" parent="."]
 offset_left = -14.0
 offset_top = -64.0
@@ -190,10 +206,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -27.0
-offset_top = -214.0
-offset_right = -27.0
-offset_bottom = -214.0
+offset_left = -26.0
+offset_top = -209.0
+offset_right = -26.0
+offset_bottom = -209.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
@@ -312,11 +328,12 @@ scale = Vector2(1920, 1080)
 [node name="Label3" type="Label" parent="."]
 anchors_preset = -1
 anchor_right = 0.01
-offset_left = 1413.0
-offset_top = 902.0
-offset_right = 1862.8
-offset_bottom = 969.0
-theme_override_fonts/font = ExtResource("6_cejvf")
+offset_left = 1237.0
+offset_top = 894.0
+offset_right = 1850.8
+offset_bottom = 961.0
+theme_override_fonts/font = ExtResource("7_wqme5")
+theme_override_font_sizes/font_size = 20
 text = "these guys wanted to be mentioned so follow:
 instagram: @kevin_aceroo, @C22H28N2O
 "
@@ -328,7 +345,8 @@ offset_left = 20.0
 offset_top = 891.0
 offset_right = 414.8
 offset_bottom = 958.0
-theme_override_fonts/font = ExtResource("6_cejvf")
+theme_override_fonts/font = ExtResource("7_wqme5")
+theme_override_font_sizes/font_size = 20
 text = "Developed By:
 Instagrams: @elijah.llee, @zekeyfreakie
 Roblox: BenxProdigy, zeke_caesar"
