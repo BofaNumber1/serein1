@@ -312,12 +312,12 @@ scale = Vector2(1920, 1080)
 [node name="Label3" type="Label" parent="."]
 anchors_preset = -1
 anchor_right = 0.01
-offset_left = 1450.0
-offset_top = 905.0
-offset_right = 1855.8
-offset_bottom = 972.0
+offset_left = 1413.0
+offset_top = 902.0
+offset_right = 1862.8
+offset_bottom = 969.0
 theme_override_fonts/font = ExtResource("6_cejvf")
-text = "this guy wants to be mentioned so follow:
+text = "these guys wanted to be mentioned so follow:
 instagram: @kevin_aceroo, @C22H28N2O
 "
 
