@@ -37,7 +37,7 @@ var bob_timer := 0.0
 
 # Idle Voice Line Timer
 var idle_timer := 0.0
-@export var idle_trigger_time := 5.0     # Seconds before first voice line plays
+@export var idle_trigger_time := 15.0     # Seconds before first voice line plays
 @export var idle1_interval := 10.0       # Seconds between voice lines
 var last_idle1_time := 0.0
 
