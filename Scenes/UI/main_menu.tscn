@@ -316,10 +316,10 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_4nkqq")
 text = "Quit"
 
 [node name="Label" type="Label" parent="."]
-offset_left = 229.0
-offset_top = 142.0
-offset_right = 951.0
-offset_bottom = 176.0
+offset_left = 224.0
+offset_top = 155.0
+offset_right = 946.0
+offset_bottom = 189.0
 rotation = 0.270526
 pivot_offset = Vector2(361, 17)
 theme_override_colors/font_color = Color(0.858824, 0.831373, 0, 0.972549)
@@ -374,9 +374,9 @@ scale = Vector2(1920, 1080)
 anchors_preset = -1
 anchor_right = 0.01
 offset_left = 1064.0
-offset_top = 872.0
+offset_top = 919.0
 offset_right = 1878.8
-offset_bottom = 939.0
+offset_bottom = 986.0
 theme_override_fonts/font = ExtResource("7_wqme5")
 theme_override_font_sizes/font_size = 20
 text = "these guys wanted to be mentioned so follow:
@@ -394,19 +394,20 @@ theme_override_fonts/font = ExtResource("7_wqme5")
 theme_override_font_sizes/font_size = 20
 text = "Developed By:
 Instagrams: @elijah.llee, @zekeyfreakie
-Roblox: BenxProdigy, zeke_caesar"
+Roblox: BenxProdigy, zeke_caesar
+Youtube: youtube.com/@zeke_caesar"
 
 [node name="EarlyAccess_png" type="Sprite2D" parent="."]
-position = Vector2(1688, 98)
+position = Vector2(1682, 190)
 texture = ExtResource("9_lrjdf")
 
 [node name="Label5" type="Label" parent="."]
 anchors_preset = -1
 anchor_right = 0.01
 offset_left = 1064.0
-offset_top = 827.0
+offset_top = 874.0
 offset_right = 1605.8
-offset_bottom = 894.0
+offset_bottom = 941.0
 theme_override_fonts/font = ExtResource("7_wqme5")
 theme_override_font_sizes/font_size = 20
 text = "Subscribe to the goats youtube channel:
