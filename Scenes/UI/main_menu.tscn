@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b22jdskd287dw"]
+[gd_scene load_steps=37 format=3 uid="uid://b22jdskd287dw"]
 
 [ext_resource type="PackedScene" uid="uid://bqu3nnn7uic1y" path="res://Scenes/Levels/intro_background.tscn" id="1_gih0s"]
 [ext_resource type="AudioStream" uid="uid://cc7w7wwph8w3r" path="res://Audio/Gameprompts - ShoogaBooga.wav" id="2_gih0s"]
@@ -10,6 +10,9 @@
 [ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="6_cejvf"]
 [ext_resource type="FontFile" uid="uid://cs8s0frmb8h3x" path="res://Fonts/ModernWarfare-OV7KP.ttf" id="7_wqme5"]
 [ext_resource type="Texture2D" uid="uid://c20cm3xde8llv" path="res://Scenes/Timmy/cover_issue_31_en_US-removebg-preview.png" id="9_lrjdf"]
+[ext_resource type="Script" uid="uid://d0od5yf4ie52d" path="res://Scripts/audio_control.gd" id="11_jewm6"]
+[ext_resource type="Script" uid="uid://67jmp2fbxh2w" path="res://Scripts/full_screen_control.gd" id="12_cejvf"]
+[ext_resource type="Script" uid="uid://ctxwo4g3piylf" path="res://Scripts/scale_control.gd" id="13_ru8vt"]
 
 [sub_resource type="GDScript" id="GDScript_opfnp"]
 script/source = "extends CanvasLayer
@@ -18,11 +21,13 @@ script/source = "extends CanvasLayer
 @onready var click_sound := $Click
 @onready var hover_sound := $Hover
 @onready var voice_line1 := $SugarBooga
-
+@onready var settings : Panel = $Settings
 # Button container path
 @onready var button_container := $Control/MarginContainer/VBoxContainer
 
 func _ready() -> void:
+	button_container.visible = true
+	settings.visible = false
 	# Ensure the FadeRect is black, full screen, and starts fully visible
 	fade_rect.color = Color.BLACK
 	fade_rect.size = get_viewport().get_visible_rect().size
@@ -61,13 +66,21 @@ func _on_start_pressed() -> void:
 	get_tree().change_scene_to_packed(Globals.loading_screen)
 	print(\"Start Pressed\")
 
-func _on_setting_pressed() -> void:
+func _on_settings_pressed() -> void:
 	click_sound.play()
-	get_tree().change_scene_to_file(Globals.settings_screen)
 	print(\"Settings Pressed\")
+	button_container.visible = false
+	settings.visible = true
+
 
 func _on_quit_pressed() -> void:
 	click_sound.play()
+	button_container.visible = false
+	var fade_out = create_tween()
+	fade_out.tween_property(fade_rect, \"modulate:a\", 1.0, 4.0) \\
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	await fade_out.finished
+	await get_tree().create_timer(0.2).timeout
 	get_tree().quit()
 	print(\"Quit Pressed\")
 
@@ -85,6 +98,17 @@ func _on_quit_mouse_entered() -> void:
 
 func _on_voice_line1_finished() -> void:
 	voice_line1.play()
+
+
+
+func _on_back_options_pressed() -> void:
+	click_sound.play()
+	button_container.visible = true
+	settings.visible = false
+
+func _on_back_options_mouse_entered() -> void:
+	hover_sound.stop()
+	hover_sound.play()
 "
 
 [sub_resource type="Theme" id="Theme_opfnp"]
@@ -157,6 +181,18 @@ _data = {
 &"bounce": SubResource("Animation_wqme5")
 }
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_wqme5"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_jewm6"]
+color = Color(0.164706, 0.788235, 0.94902, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cejvf"]
+color = Color(0.164706, 0.788235, 0.94902, 1)
+thickness = 6
+
 [node name="MainMenu" type="CanvasLayer"]
 script = SubResource("GDScript_opfnp")
 
@@ -183,19 +219,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 121.911, 141.704)
 stream = ExtResource("2_lrjdf")
 volume_db = -10.0
 autoplay = true
+bus = &"Music"
+parameters/looping = true
 
 [node name="SugarBooga" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_gih0s")
 autoplay = true
+bus = &"SFX"
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_k33u3")
-volume_db = 9.0
-pitch_scale = 1.03
+bus = &"SFX"
 
 [node name="Hover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_lrjdf")
-volume_db = 10.0
+bus = &"SFX"
 
 [node name="Logo" type="TextureRect" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -419,9 +457,180 @@ theme_override_font_sizes/font_size = 20
 text = "Subscribe to the goats youtube channel:
 youtube.com/@luke_rs"
 
+[node name="Settings" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -300.0
+offset_right = 384.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="Settings"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -76.0
+offset_right = 264.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_top = NodePath("../Start")
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("6_cejvf")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_m3bi6")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wyh8j")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ujyyl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mkpwh")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4nkqq")
+text = "Back"
+
+[node name="Settings" type="Label" parent="Settings"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 68.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_cejvf")
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="Settings"]
+layout_mode = 2
+offset_left = -69.0
+offset_top = 109.0
+offset_right = 189.0
+offset_bottom = 147.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_cejvf")
+theme_override_font_sizes/font_size = 32
+text = "Music"
+horizontal_alignment = 1
+
+[node name="AudioControl" type="HSlider" parent="Settings/Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 73.5
+offset_top = -22.0
+offset_right = 436.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_wqme5")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_jewm6")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_cejvf")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("11_jewm6")
+audio_bus_name = "Music"
+
+[node name="SFX" type="Label" parent="Settings"]
+layout_mode = 2
+offset_left = -69.0
+offset_top = 144.0
+offset_right = 189.0
+offset_bottom = 182.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_cejvf")
+theme_override_font_sizes/font_size = 32
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="AudioControl2" type="HSlider" parent="Settings/SFX"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 74.0
+offset_top = -23.0
+offset_right = 437.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_wqme5")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_jewm6")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_cejvf")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("11_jewm6")
+audio_bus_name = "SFX"
+
+[node name="FullScreenControl" type="CheckButton" parent="Settings"]
+layout_mode = 2
+offset_top = 188.0
+offset_right = 258.0
+offset_bottom = 230.0
+theme_override_fonts/font = ExtResource("6_cejvf")
+theme_override_font_sizes/font_size = 28
+text = "Fullscreen"
+script = ExtResource("12_cejvf")
+
+[node name="ScaleControl" type="OptionButton" parent="Settings"]
+layout_mode = 2
+offset_left = 211.0
+offset_top = 228.0
+offset_right = 469.0
+offset_bottom = 270.0
+theme_override_fonts/font = ExtResource("6_cejvf")
+theme_override_font_sizes/font_size = 28
+selected = 0
+item_count = 4
+popup/item_0/text = "100"
+popup/item_0/id = 0
+popup/item_1/text = "75"
+popup/item_1/id = 1
+popup/item_2/text = "50"
+popup/item_2/id = 2
+popup/item_3/text = "25"
+popup/item_3/id = 3
+script = ExtResource("13_ru8vt")
+
+[node name="ScaleControlLabel" type="Label" parent="Settings"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -70.0
+offset_right = 175.0
+offset_bottom = -32.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_cejvf")
+theme_override_font_sizes/font_size = 30
+text = "3D Scale"
+horizontal_alignment = 1
+
 [connection signal="mouse_entered" from="Control/MarginContainer/VBoxContainer/Start" to="." method="_on_start_mouse_entered"]
 [connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="mouse_entered" from="Control/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_mouse_entered"]
 [connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="mouse_entered" from="Control/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]
 [connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="mouse_entered" from="Settings/Back" to="." method="_on_back_options_mouse_entered"]
+[connection signal="pressed" from="Settings/Back" to="." method="_on_back_options_pressed"]
+[connection signal="value_changed" from="Settings/Label/AudioControl" to="Settings/Label/AudioControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Settings/SFX/AudioControl2" to="Settings/SFX/AudioControl2" method="_on_value_changed"]
+[connection signal="toggled" from="Settings/FullScreenControl" to="Settings/FullScreenControl" method="_on_toggled"]
+[connection signal="item_selected" from="Settings/ScaleControl" to="Settings/ScaleControl" method="_on_item_selected"]

@@ -172,7 +172,6 @@ func _physics_process(delta):
 
 	camera_smooth_follow(delta)
 
-# === ORIGINAL CAMERA FUNCTION from your very first script ===
 func camera_smooth_follow(delta):
 	var camera_T = camera_target.global_transform.basis.get_euler().y
 
