@@ -3,13 +3,13 @@ extends CharacterBody3D
 # Animation Parameters
 @export var animation_tree: AnimationTree
 @export var animation_player: AnimationPlayer
-@onready var animation_state = animation_tree.get("parameters/playback")
+var animation_state
 @onready var footstep = $footstep
 @onready var idle1 = $IdleVoiceLine1
 
-# Camera Target and Parent
-@export var camera_target: Node3D
-@export var camera_parent: Node3D
+# Camera Nodes
+@export var camera_yaw: Node3D
+@export var camera_pitch: Node3D
 @export var actual_camera: Camera3D 
 
 # Camera Follow Variables
@@ -64,23 +64,14 @@ var vertical = 0.0
 @export var jump_velocity := 200.0
 @export var gravity := -500.0
 
-# Mouse sensitivity (assuming you have this)
-var mouse_sensitivity := 0.002
-var camera_pitch := 0.0
-var max_pitch := deg_to_rad(80)
-var min_pitch := deg_to_rad(-80)
-
 func _ready():
+	animation_state = animation_tree.get("parameters/playback")
 	current_x_offset = left_offset_x
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouse_moved_timer = 0.0  # Reset mouse idle timer
-		camera_target.rotate_y(-event.relative.x * mouse_sensitivity)
-		camera_pitch = clamp(camera_pitch + event.relative.y * mouse_sensitivity, min_pitch, max_pitch)
-		camera_parent.rotation.x = camera_pitch
-
 
 func _process(delta):
 	mouse_moved_timer += delta
@@ -107,16 +98,23 @@ func _process(delta):
 	actual_camera.fov = lerp(actual_camera.fov, target_fov, fov_lerp_speed * delta)
 
 func _physics_process(delta):
-	var camera_T = camera_target.global_transform.basis.get_euler().y
+	var camera_yaw_angle = camera_yaw.global_transform.basis.get_euler().y
+	var is_vaulting = is_sprinting and Input.is_action_pressed("vault")
 
-	# Get input direction
 	inputdir = Vector3(horizontal, 0, vertical).normalized()
 
-	if inputdir != Vector3.ZERO:
-		direction = inputdir.rotated(Vector3.UP, camera_T).normalized()
-		anim_canmove = true
+	if not is_vaulting:
+		if inputdir != Vector3.ZERO:
+			direction = inputdir.rotated(Vector3.UP, camera_yaw_angle).normalized()
+			anim_canmove = true
+			var target_rotation = atan2(direction.x, direction.z)
+			rotation.y = lerp_angle(rotation.y, target_rotation, turn_speed * delta)
+		else:
+			anim_canmove = false
 	else:
-		anim_canmove = false
+		# Vaulting: move forward only, no rotation changes
+		anim_canmove = true
+		direction = Vector3(0, 0, 1).rotated(Vector3.UP, rotation.y)
 
 	is_sprinting = Input.is_action_pressed("sprint") and inputdir != Vector3.ZERO
 
@@ -130,10 +128,7 @@ func _physics_process(delta):
 	else:
 		velocity.y += gravity * delta
 
-	# Vault condition — sprinting and holding E ("vault" input action)
-	var is_vaulting = is_sprinting and Input.is_action_pressed("vault") 
-
-	# Animation conditions (including vault)
+	# Animation conditions
 	animation_tree.set("parameters/conditions/startmove", anim_canmove)
 	animation_tree.set("parameters/conditions/Idle", !anim_canmove)
 	animation_tree.set("parameters/conditions/Run", is_sprinting)
@@ -154,11 +149,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-	# Smooth rotation
-	if anim_canmove:
-		rotation.y = lerp_angle(rotation.y, atan2(direction.x, direction.z), turn_speed * delta)
-
-	# Idle voice line logic — only plays when not moving (ignores mouse movement)
+	# Idle voice line logic
 	if horizontal == 0 and vertical == 0 and is_on_floor():
 		idle_timer += delta
 		if idle_timer >= idle_trigger_time:
@@ -173,20 +164,18 @@ func _physics_process(delta):
 	camera_smooth_follow(delta)
 
 func camera_smooth_follow(delta):
-	var camera_T = camera_target.global_transform.basis.get_euler().y
+	var camera_yaw_angle = camera_yaw.global_transform.basis.get_euler().y
 
 	# Side offset
 	var target_x = left_offset_x if !anim_canmove else 0.0
 	current_x_offset = lerp(current_x_offset, target_x, lerp_speed * delta)
 
 	# Basic offset (up + back)
-	var offset = Vector3(current_x_offset, base_y, base_z).rotated(Vector3.UP, camera_T)
+	var offset = Vector3(current_x_offset, base_y, base_z).rotated(Vector3.UP, camera_yaw_angle)
 	var desired_pos = global_transform.origin + offset
 
-	# Start with no offset
+	# Camera shake & bobbing
 	var shake_offset = Vector3.ZERO
-
-	# Sprint camera shake
 	if is_sprinting:
 		shake_timer += delta * shake_speed
 		shake_offset += Vector3(
@@ -194,8 +183,6 @@ func camera_smooth_follow(delta):
 			cos(shake_timer * 15.0),
 			0
 		) * shake_strength
-
-	# Walk bobbing (only when walking, not sprinting)
 	elif anim_canmove and !is_sprinting:
 		bob_timer += delta * bob_speed
 		shake_offset += Vector3(
@@ -211,7 +198,7 @@ func camera_smooth_follow(delta):
 
 	var cam_speed = 250
 	var cam_timer = clamp(delta * cam_speed / 20.0, 0.0, 1.0)
-	camera_parent.global_transform.origin = camera_parent.global_transform.origin.lerp(desired_pos, cam_timer)
+	camera_pitch.global_transform.origin = camera_pitch.global_transform.origin.lerp(desired_pos, cam_timer)
 
 func player_sound():
 	footstep.playing = true

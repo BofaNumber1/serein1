@@ -58,7 +58,7 @@ func _on_start_pressed() -> void:
 
 	# Fade out over 4 seconds
 	var fade_out = create_tween()
-	fade_out.tween_property(fade_rect, \"modulate:a\", 1.0, 4.0) \\
+	fade_out.tween_property(fade_rect, \"modulate:a\", 1.0, 1.5) \\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 
 	await fade_out.finished
@@ -77,10 +77,9 @@ func _on_quit_pressed() -> void:
 	click_sound.play()
 	button_container.visible = false
 	var fade_out = create_tween()
-	fade_out.tween_property(fade_rect, \"modulate:a\", 1.0, 4.0) \\
+	fade_out.tween_property(fade_rect, \"modulate:a\", 1.0, 1.5) \\
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	await fade_out.finished
-	await get_tree().create_timer(0.2).timeout
 	get_tree().quit()
 	print(\"Quit Pressed\")
 
@@ -225,7 +224,6 @@ parameters/looping = true
 [node name="SugarBooga" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_gih0s")
 autoplay = true
-bus = &"SFX"
 
 [node name="Click" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_k33u3")
@@ -233,6 +231,7 @@ bus = &"SFX"
 
 [node name="Hover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_lrjdf")
+volume_db = 10.0
 bus = &"SFX"
 
 [node name="Logo" type="TextureRect" parent="."]
@@ -509,12 +508,44 @@ theme_override_font_sizes/font_size = 32
 text = "Settings"
 horizontal_alignment = 1
 
+[node name="AudioControl" type="HSlider" parent="Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.5
+offset_top = -152.0
+offset_right = 110.5
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_wqme5")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_jewm6")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_cejvf")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("11_jewm6")
+audio_bus_name = "Voice Lines"
+
+[node name="Label2" type="Label" parent="Settings"]
+offset_left = -30.0
+offset_top = 158.0
+offset_right = 161.0
+offset_bottom = 192.0
+theme_override_fonts/font = ExtResource("6_cejvf")
+theme_override_font_sizes/font_size = 18
+text = "Voice Lines"
+horizontal_alignment = 1
+
 [node name="Label" type="Label" parent="Settings"]
 layout_mode = 2
 offset_left = -69.0
-offset_top = 109.0
+offset_top = 66.0
 offset_right = 189.0
-offset_bottom = 147.0
+offset_bottom = 104.0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("6_cejvf")
 theme_override_font_sizes/font_size = 32
@@ -546,9 +577,9 @@ audio_bus_name = "Music"
 [node name="SFX" type="Label" parent="Settings"]
 layout_mode = 2
 offset_left = -69.0
-offset_top = 144.0
+offset_top = 108.0
 offset_right = 189.0
-offset_bottom = 182.0
+offset_bottom = 146.0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("6_cejvf")
 theme_override_font_sizes/font_size = 32
@@ -630,6 +661,7 @@ horizontal_alignment = 1
 [connection signal="pressed" from="Control/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="mouse_entered" from="Settings/Back" to="." method="_on_back_options_mouse_entered"]
 [connection signal="pressed" from="Settings/Back" to="." method="_on_back_options_pressed"]
+[connection signal="value_changed" from="Settings/AudioControl" to="Settings/AudioControl" method="_on_value_changed"]
 [connection signal="value_changed" from="Settings/Label/AudioControl" to="Settings/Label/AudioControl" method="_on_value_changed"]
 [connection signal="value_changed" from="Settings/SFX/AudioControl2" to="Settings/SFX/AudioControl2" method="_on_value_changed"]
 [connection signal="toggled" from="Settings/FullScreenControl" to="Settings/FullScreenControl" method="_on_toggled"]

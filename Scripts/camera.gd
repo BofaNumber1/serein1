@@ -16,10 +16,9 @@ func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() != 0:
 		yaw += -event.relative.x * yaw_sens
 		pitch += event.relative.y * pitch_sens
+		pitch = clamp(pitch, deg_to_rad(pitch_min), deg_to_rad(pitch_max))
 
 
 func _physics_process(delta):
 	camera_target.rotation.y = lerpf(camera_target.rotation.y, yaw, delta * 10)
 	camera_target.rotation.x = lerpf(camera_target.rotation.x, pitch, delta * 10)
-	
-	pitch = clamp(pitch, deg_to_rad(pitch_min), deg_to_rad(pitch_max))

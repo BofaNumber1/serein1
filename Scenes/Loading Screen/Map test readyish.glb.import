@@ -1,0 +1,864 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://coc2syjg2coi7"
+path="res://.godot/imported/Map test readyish.glb-c3e803f2423c68e320d874c7b8c74cd3.scn"
+
+[deps]
+
+source_file="res://Scenes/Loading Screen/Map test readyish.glb"
+dest_files=["res://.godot/imported/Map test readyish.glb-c3e803f2423c68e320d874c7b8c74cd3.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+_subresources={
+"meshes": {
+"Map test readyish_2Turns_Material_001_0": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_2Turns_Material_001_0.res"
+},
+"Map test readyish_2Turns_Material_001_0_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_2Turns_Material_001_0_002.res"
+},
+"Map test readyish_Cube_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Cube_001.res"
+},
+"Map test readyish_Cube_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Cube_002.res"
+},
+"Map test readyish_Cube_031": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Cube_031.res"
+},
+"Map test readyish_Cube_097": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Cube_097.res"
+},
+"Map test readyish_LeftTurn_Material_001_0_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_LeftTurn_Material_001_0_003.res"
+},
+"Map test readyish_LeftTurn_Material_001_0_004": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_LeftTurn_Material_001_0_004.res"
+},
+"Map test readyish_LeftTurn_Material_001_0_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_LeftTurn_Material_001_0_005.res"
+},
+"Map test readyish_LeftTurn_Material_001_0_006": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_LeftTurn_Material_001_0_006.res"
+},
+"Map test readyish_Object_1": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1.res"
+},
+"Map test readyish_Object_1_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_001.res"
+},
+"Map test readyish_Object_1_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_002.res"
+},
+"Map test readyish_Object_1_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_003.res"
+},
+"Map test readyish_Object_1_004": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_004.res"
+},
+"Map test readyish_Object_1_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_005.res"
+},
+"Map test readyish_Object_1_006": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_006.res"
+},
+"Map test readyish_Object_1_007": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_007.res"
+},
+"Map test readyish_Object_1_008": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_008.res"
+},
+"Map test readyish_Object_1_009": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_009.res"
+},
+"Map test readyish_Object_1_010": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_010.res"
+},
+"Map test readyish_Object_1_011": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_Object_1_011.res"
+},
+"Map test readyish_PizzaBuilding_Texture_buildings1_0_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PizzaBuilding_Texture_buildings1_0_001.res"
+},
+"Map test readyish_PublicBuilding_10_Pack3_0_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_10_Pack3_0_001.res"
+},
+"Map test readyish_PublicBuilding_10_Pack3_0_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_10_Pack3_0_002.res"
+},
+"Map test readyish_PublicBuilding_8_Pack3_0_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_8_Pack3_0_001.res"
+},
+"Map test readyish_PublicBuilding_8_Pack3_0_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_8_Pack3_0_002.res"
+},
+"Map test readyish_PublicBuilding_8_Pack3_0_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_8_Pack3_0_003.res"
+},
+"Map test readyish_PublicBuilding_8_Pack3_0_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_8_Pack3_0_005.res"
+},
+"Map test readyish_PublicBuilding_9_Pack3_0_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_9_Pack3_0_001.res"
+},
+"Map test readyish_PublicBuilding_9_Pack3_0_002": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_9_Pack3_0_002.res"
+},
+"Map test readyish_PublicBuilding_9_Pack3_0_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_9_Pack3_0_003.res"
+},
+"Map test readyish_PublicBuilding_9_Pack3_0_004": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_9_Pack3_0_004.res"
+},
+"Map test readyish_PublicBuilding_9_Pack3_0_005": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_9_Pack3_0_005.res"
+},
+"Map test readyish_PublicBuilding_9_Pack3_0_006": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_9_Pack3_0_006.res"
+},
+"Map test readyish_PublicBuilding_9_Pack3_0_007": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_9_Pack3_0_007.res"
+},
+"Map test readyish_PublicBuilding_9_Pack3_0_008": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_9_Pack3_0_008.res"
+},
+"Map test readyish_PublicBuilding_CityHall_TextureBuildingsPack2_0": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_CityHall_TextureBuildingsPack2_0.res"
+},
+"Map test readyish_PublicBuilding_GasStation_TextureBuildingsPack2_0_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_GasStation_TextureBuildingsPack2_0_001.res"
+},
+"Map test readyish_PublicBuilding_Hospital_TextureBuildingsPack2_0_003": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_Hospital_TextureBuildingsPack2_0_003.res"
+},
+"Map test readyish_PublicBuilding_Pharmacy_TextureBuildingsPack2_0_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_Pharmacy_TextureBuildingsPack2_0_001.res"
+},
+"Map test readyish_PublicBuilding_Police_TextureBuildingsPack2_0_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_PublicBuilding_Police_TextureBuildingsPack2_0_001.res"
+},
+"Map test readyish_RoadFull_Material_002_0_017": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_017.res"
+},
+"Map test readyish_RoadFull_Material_002_0_018": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_018.res"
+},
+"Map test readyish_RoadFull_Material_002_0_019": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_019.res"
+},
+"Map test readyish_RoadFull_Material_002_0_020": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_020.res"
+},
+"Map test readyish_RoadFull_Material_002_0_021": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_021.res"
+},
+"Map test readyish_RoadFull_Material_002_0_022": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_022.res"
+},
+"Map test readyish_RoadFull_Material_002_0_023": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_023.res"
+},
+"Map test readyish_RoadFull_Material_002_0_024": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_024.res"
+},
+"Map test readyish_RoadFull_Material_002_0_025": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_025.res"
+},
+"Map test readyish_RoadFull_Material_002_0_026": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_026.res"
+},
+"Map test readyish_RoadFull_Material_002_0_027": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_027.res"
+},
+"Map test readyish_RoadFull_Material_002_0_028": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_028.res"
+},
+"Map test readyish_RoadFull_Material_002_0_029": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_029.res"
+},
+"Map test readyish_RoadFull_Material_002_0_030": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_030.res"
+},
+"Map test readyish_RoadFull_Material_002_0_031": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_031.res"
+},
+"Map test readyish_RoadFull_Material_002_0_032": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_032.res"
+},
+"Map test readyish_RoadFull_Material_002_0_033": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_033.res"
+},
+"Map test readyish_RoadFull_Material_002_0_034": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_034.res"
+},
+"Map test readyish_RoadFull_Material_002_0_035": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_035.res"
+},
+"Map test readyish_RoadFull_Material_002_0_036": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_036.res"
+},
+"Map test readyish_RoadFull_Material_002_0_037": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_037.res"
+},
+"Map test readyish_RoadFull_Material_002_0_038": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_038.res"
+},
+"Map test readyish_RoadFull_Material_002_0_039": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_039.res"
+},
+"Map test readyish_RoadFull_Material_002_0_042": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_042.res"
+},
+"Map test readyish_RoadFull_Material_002_0_043": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_043.res"
+},
+"Map test readyish_RoadFull_Material_002_0_044": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_044.res"
+},
+"Map test readyish_RoadFull_Material_002_0_045": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_045.res"
+},
+"Map test readyish_RoadFull_Material_002_0_046": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_046.res"
+},
+"Map test readyish_RoadFull_Material_002_0_047": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_047.res"
+},
+"Map test readyish_RoadFull_Material_002_0_048": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_048.res"
+},
+"Map test readyish_RoadFull_Material_002_0_065": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_065.res"
+},
+"Map test readyish_RoadFull_Material_002_0_066": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_066.res"
+},
+"Map test readyish_RoadFull_Material_002_0_067": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_067.res"
+},
+"Map test readyish_RoadFull_Material_002_0_068": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_068.res"
+},
+"Map test readyish_RoadFull_Material_002_0_069": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_069.res"
+},
+"Map test readyish_RoadFull_Material_002_0_070": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_070.res"
+},
+"Map test readyish_RoadFull_Material_002_0_071": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_071.res"
+},
+"Map test readyish_RoadFull_Material_002_0_072": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_072.res"
+},
+"Map test readyish_RoadFull_Material_002_0_073": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_073.res"
+},
+"Map test readyish_RoadFull_Material_002_0_076": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_076.res"
+},
+"Map test readyish_RoadFull_Material_002_0_077": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_077.res"
+},
+"Map test readyish_RoadFull_Material_002_0_078": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_078.res"
+},
+"Map test readyish_RoadFull_Material_002_0_079": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_079.res"
+},
+"Map test readyish_RoadFull_Material_002_0_080": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_080.res"
+},
+"Map test readyish_RoadFull_Material_002_0_081": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_081.res"
+},
+"Map test readyish_RoadFull_Material_002_0_082": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_082.res"
+},
+"Map test readyish_RoadFull_Material_002_0_083": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_083.res"
+},
+"Map test readyish_RoadFull_Material_002_0_084": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_084.res"
+},
+"Map test readyish_RoadFull_Material_002_0_085": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_085.res"
+},
+"Map test readyish_RoadFull_Material_002_0_086": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_086.res"
+},
+"Map test readyish_RoadFull_Material_002_0_087": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_087.res"
+},
+"Map test readyish_RoadFull_Material_002_0_088": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_088.res"
+},
+"Map test readyish_RoadFull_Material_002_0_089": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_089.res"
+},
+"Map test readyish_RoadFull_Material_002_0_090": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_090.res"
+},
+"Map test readyish_RoadFull_Material_002_0_091": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_091.res"
+},
+"Map test readyish_RoadFull_Material_002_0_092": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_092.res"
+},
+"Map test readyish_RoadFull_Material_002_0_093": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_093.res"
+},
+"Map test readyish_RoadFull_Material_002_0_094": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_094.res"
+},
+"Map test readyish_RoadFull_Material_002_0_095": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_095.res"
+},
+"Map test readyish_RoadFull_Material_002_0_096": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_RoadFull_Material_002_0_096.res"
+},
+"Map test readyish_ShopBuilding_Texture_buildings1_0_001": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"save_to_file/enabled": true,
+"save_to_file/path": "res://Resources/Map test readyish_ShopBuilding_Texture_buildings1_0_001.res"
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1
