@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bydavmn4nllnw" path="res://cam_root.gd" id="1_wm68g"]
 
 [node name="CamRoot" type="Node3D" node_paths=PackedStringArray("camera_pitch_node")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 script = ExtResource("1_wm68g")
 camera_pitch_node = NodePath("CamPitch")
 
