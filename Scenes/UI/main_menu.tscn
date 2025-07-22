@@ -531,7 +531,6 @@ script = ExtResource("11_jewm6")
 audio_bus_name = "Voice Lines"
 
 [node name="Label2" type="Label" parent="Settings"]
-layout_mode = 0
 offset_left = -30.0
 offset_top = 158.0
 offset_right = 161.0
