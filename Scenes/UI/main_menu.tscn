@@ -423,7 +423,7 @@ offset_bottom = 986.0
 theme_override_fonts/font = ExtResource("7_wqme5")
 theme_override_font_sizes/font_size = 20
 text = "these guys wanted to be mentioned so follow:
-instagram: @kevin_aceroo, @C22H28N2O, @MacAttack1125, @quji.min
+instagram: @kevin_aceroo, @gablinkski, @MacAttack1125, @quji.min
 "
 
 [node name="Label2" type="Label" parent="."]
