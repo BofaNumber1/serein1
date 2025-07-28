@@ -36,7 +36,7 @@ actual_camera = NodePath("CamRoot/CamPitch/SpringArm3D/Camera3D")
 [node name="CamRoot" parent="Timmy" instance=ExtResource("6_wof2g")]
 
 [node name="Camera3D" parent="Timmy/CamRoot/CamPitch/SpringArm3D" index="0"]
-transform = Transform3D(-0.929133, -0.0302965, 0.368503, 0, 0.996637, 0.0819385, -0.369747, 0.0761317, -0.926008, 0, 27.581, -161.109)
+transform = Transform3D(-92.9132, -3.02965, 36.8503, 0, 99.6637, 8.19385, -36.9747, 7.61317, -92.6008, 0, 345.498, -857.479)
 
 [node name="LoadingManager" type="Node3D" parent="."]
 script = ExtResource("3_3d446")

@@ -3,6 +3,7 @@ extends Node3D
 @export var camera_pitch_node: Node3D
 @export var pitch_min = -50.0
 @export var pitch_max = 50.0
+@export var camera_distance = 3.0  # New variable to control camera distance (adjust to zoom in)
 var yaw := 0.0
 var pitch := 0.0
 var yaw_sensitivity := 0.002
@@ -13,6 +14,10 @@ func _ready():
 	# Reset rotations to zero to avoid leftover rotation issues
 	rotation = Vector3.ZERO
 	camera_pitch_node.rotation = Vector3.ZERO
+	# Set initial camera position
+	if camera_pitch_node.get_node_or_null("Camera3D"):
+		var camera = camera_pitch_node.get_node("Camera3D")
+		camera.transform.origin = Vector3(0, 0, camera_distance)  # Move camera closer
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() != Input.MOUSE_MODE_VISIBLE:
@@ -29,3 +34,8 @@ func _physics_process(delta):
 	var pitch_basis = Basis(Vector3.RIGHT, pitch)
 	# Multiply parent's basis (yaw) by pitch for local rotation
 	camera_pitch_node.global_transform.basis = global_transform.basis * pitch_basis
+	
+	# Ensure camera stays at desired distance
+	if camera_pitch_node.get_node_or_null("Camera3D"):
+		var camera = camera_pitch_node.get_node("Camera3D")
+		camera.transform.origin = Vector3(0, 0, camera_distance)  # Maintain distance

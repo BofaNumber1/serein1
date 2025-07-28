@@ -76,7 +76,8 @@ func _input(event):
 func _process(delta):
 	mouse_moved_timer += delta
 
-	horizontal = Input.get_axis("right", "left")
+	# Fixed: Correct input axis for horizontal movement
+	horizontal = Input.get_axis("left", "right")  # Left is negative, right is positive
 	vertical = Input.get_axis("backward", "forward")
 
 	if anim_canmove:
@@ -98,10 +99,15 @@ func _process(delta):
 	actual_camera.fov = lerp(actual_camera.fov, target_fov, fov_lerp_speed * delta)
 
 func _physics_process(delta):
+	# Move is_sprinting check before is_vaulting for consistency
+	is_sprinting = Input.is_action_pressed("sprint") and inputdir != Vector3.ZERO
 	var camera_yaw_angle = camera_yaw.global_transform.basis.get_euler().y
 	var is_vaulting = is_sprinting and Input.is_action_pressed("vault")
 
-	inputdir = Vector3(horizontal, 0, vertical).normalized()
+	# Fix: Avoid normalizing zero vector
+	inputdir = Vector3(horizontal, 0, vertical)
+	if inputdir != Vector3.ZERO:
+		inputdir = inputdir.normalized()
 
 	if not is_vaulting:
 		if inputdir != Vector3.ZERO:
@@ -115,8 +121,6 @@ func _physics_process(delta):
 		# Vaulting: move forward only, no rotation changes
 		anim_canmove = true
 		direction = Vector3(0, 0, 1).rotated(Vector3.UP, rotation.y)
-
-	is_sprinting = Input.is_action_pressed("sprint") and inputdir != Vector3.ZERO
 
 	# Jumping
 	if is_on_floor():
