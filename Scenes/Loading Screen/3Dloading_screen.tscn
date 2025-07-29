@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bbhgqwhsncjxm"]
+[gd_scene load_steps=13 format=3 uid="uid://bbhgqwhsncjxm"]
 
 [ext_resource type="PackedScene" uid="uid://dibvhemwm7yk1" path="res://Scenes/Timmy/Timmy.tscn" id="1_ox256"]
 [ext_resource type="Script" uid="uid://c2orjs7miuocx" path="res://Scripts/3Dloading_screen.gd" id="3_3d446"]
 [ext_resource type="AudioStream" uid="uid://co2b3ew3cetls" path="res://Audio/LoadingScreenLoop.mp3" id="4_nop8t"]
+[ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="5_slj20"]
 [ext_resource type="Texture2D" uid="uid://dounf8jgmc1kl" path="res://kloppenheim_02_puresky_2k.hdr" id="5_wof2g"]
 [ext_resource type="PackedScene" uid="uid://ccvls6fmy4f28" path="res://Scenes/Timmy/cam_root.tscn" id="6_wof2g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3d446"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqqfj"]
 bg_color = Color(0, 0, 0, 0.47451)
@@ -57,6 +60,16 @@ autoplay = true
 parameters/looping = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("5_slj20")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/background = SubResource("StyleBoxEmpty_3d446")
 
 [node name="TipPanel" type="Panel" parent="CanvasLayer"]
 anchors_preset = 3

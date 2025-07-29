@@ -77,7 +77,7 @@ func _process(delta):
 	mouse_moved_timer += delta
 
 	# Fixed: Correct input axis for horizontal movement
-	horizontal = Input.get_axis("left", "right")  # Left is negative, right is positive
+	horizontal = -Input.get_axis("left", "right")  # Left is negative, right is positive
 	vertical = Input.get_axis("backward", "forward")
 
 	if anim_canmove:
