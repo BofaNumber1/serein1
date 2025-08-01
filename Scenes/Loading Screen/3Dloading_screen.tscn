@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbhgqwhsncjxm"]
+[gd_scene load_steps=12 format=3 uid="uid://bbhgqwhsncjxm"]
 
 [ext_resource type="PackedScene" uid="uid://dibvhemwm7yk1" path="res://Scenes/Timmy/Timmy.tscn" id="1_ox256"]
 [ext_resource type="Script" uid="uid://c2orjs7miuocx" path="res://Scripts/3Dloading_screen.gd" id="3_3d446"]
 [ext_resource type="AudioStream" uid="uid://co2b3ew3cetls" path="res://Audio/LoadingScreenLoop.mp3" id="4_nop8t"]
 [ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="5_slj20"]
 [ext_resource type="Texture2D" uid="uid://dounf8jgmc1kl" path="res://kloppenheim_02_puresky_2k.hdr" id="5_wof2g"]
-[ext_resource type="PackedScene" uid="uid://ccvls6fmy4f28" path="res://Scenes/Timmy/cam_root.tscn" id="6_wof2g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3d446"]
 
@@ -31,15 +30,7 @@ sky = SubResource("Sky_50ct6")
 
 [node name="Loading Screen" type="Node3D"]
 
-[node name="Timmy" parent="." node_paths=PackedStringArray("camera_yaw", "camera_pitch", "actual_camera") instance=ExtResource("1_ox256")]
-camera_yaw = NodePath("CamRoot")
-camera_pitch = NodePath("CamRoot/CamPitch")
-actual_camera = NodePath("CamRoot/CamPitch/SpringArm3D/Camera3D")
-
-[node name="CamRoot" parent="Timmy" instance=ExtResource("6_wof2g")]
-
-[node name="Camera3D" parent="Timmy/CamRoot/CamPitch/SpringArm3D" index="0"]
-transform = Transform3D(-92.9132, -3.02965, 36.8503, 0, 99.6637, 8.19385, -36.9747, 7.61317, -92.6008, 0, 345.498, -857.479)
+[node name="Timmy" parent="." instance=ExtResource("1_ox256")]
 
 [node name="LoadingManager" type="Node3D" parent="."]
 script = ExtResource("3_3d446")
@@ -115,5 +106,3 @@ environment = SubResource("Environment_03iyy")
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.573576, 0.45212, -0.68308, 0, 0.833886, 0.551937, 0.819152, -0.316578, 0.478297, 0, 0, 0)
 shadow_enabled = true
-
-[editable path="Timmy/CamRoot"]
