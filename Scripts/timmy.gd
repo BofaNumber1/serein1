@@ -8,31 +8,26 @@ var animation_state
 @onready var idle1 = $IdleVoiceLine1
 
 # Camera Nodes (Legacy - for compatibility with old system)
-@export var camera_root: Node3D        # The top Node3D controlling camera rig position relative to player
-@export var camera_target: Node3D      # The node that handles camera rotation (yaw/pitch)
+@export var camera_root: Node3D
+@export var camera_target: Node3D
 
 # New Camera System
-@export var third_person_camera: Node3D  # Reference to ThirdPersonCamera scene
+@export var third_person_camera: Node3D
 
 # Camera Follow Offsets (Legacy)
 @export var follow_target_height_offset := 1.5
-@export var camera_back_offset := -4.0  # Distance behind player
+@export var camera_back_offset := -4.0
 
-# Movement and rotation (Tank Controls)
+# Movement and rotation
 @export var turn_speed := 10
-@export var rotation_speed := 3.0  # How fast Timmy rotates with left/right input
+@export var rotation_speed := 6.0
 
 # Player Parameters
-var inputdir = Vector3()
 var direction = Vector3()
 var anim_canmove = false
 var is_sprinting = false
 var is_jumping = false
 var is_vaulting = false
-
-# Input (Tank Style)
-var move_input = 0.0  # Forward/backward movement
-var turn_input = 0.0  # Left/right rotation
 
 # Movement speeds
 @export var walk_speed := 55.0
@@ -55,12 +50,6 @@ func _input(event):
 		idle_timer = 0.0
 
 func _process(delta):
-	# Tank-style controls: 
-	# - Forward/Backward for movement
-	# - Left/Right for rotation
-	move_input = Input.get_axis("backward", "forward")
-	turn_input = Input.get_axis("right", "left")
-
 	if anim_canmove:
 		var root_pos = animation_tree.get_root_motion_position()
 		var current_rotation = animation_tree.get_root_motion_rotation_accumulator().inverse() * get_quaternion()
@@ -71,31 +60,30 @@ func _process(delta):
 		var root_velocity = Vector3.ZERO
 
 func _physics_process(delta):
-	# Determine if we're moving or sprinting
-	var is_moving = abs(move_input) > 0.0
+	var input_vector = Vector2(
+		Input.get_axis("right", "left"),
+		Input.get_axis("backward", "forward")
+	)
+
+	var is_moving = input_vector.length() > 0.1
 	is_sprinting = Input.is_action_pressed("sprint") and is_moving
 	is_vaulting = is_sprinting and Input.is_action_pressed("vault")
 
-	# Update camera state if using new camera system
 	if third_person_camera and third_person_camera.has_method("set_movement_state"):
 		third_person_camera.set_movement_state(is_moving, is_sprinting)
 
-	# Tank-style rotation: Left/Right input rotates the player directly
-	if abs(turn_input) > 0.0:
-		rotation.y += turn_input * rotation_speed * delta
-
-	# Tank-style movement: Forward/Backward moves in the direction Timmy is facing
-	if is_vaulting:
+	if is_moving:
+		input_vector = input_vector.normalized()
 		anim_canmove = true
+
+		var move_dir = Vector3(input_vector.x, 0, input_vector.y)
+		var target_rotation = atan2(move_dir.x, move_dir.z)
+		rotation.y = lerp_angle(rotation.y, target_rotation, rotation_speed * delta)
+
 		direction = Vector3(0, 0, 1).rotated(Vector3.UP, rotation.y)
 	else:
-		if is_moving:
-			# Move forward/backward relative to Timmy's current rotation
-			direction = Vector3(0, 0, move_input).rotated(Vector3.UP, rotation.y).normalized()
-			anim_canmove = true
-		else:
-			anim_canmove = false
-			direction = Vector3.ZERO
+		anim_canmove = false
+		direction = Vector3.ZERO
 
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump") and !anim_canmove:
@@ -106,6 +94,7 @@ func _physics_process(delta):
 	else:
 		velocity.y += gravity * delta
 
+	# Animation states
 	animation_tree.set("parameters/conditions/startmove", anim_canmove)
 	animation_tree.set("parameters/conditions/Idle", !anim_canmove)
 	animation_tree.set("parameters/conditions/Run", is_sprinting)
@@ -125,7 +114,8 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-	if move_input == 0 and turn_input == 0 and is_on_floor():
+	# Idle voice line logic
+	if !is_moving and is_on_floor():
 		idle_timer += delta
 		if idle_timer >= idle_trigger_time:
 			var now = Time.get_ticks_msec()
@@ -135,12 +125,10 @@ func _physics_process(delta):
 	else:
 		idle_timer = 0.0
 
-	# CAMERA POSITIONING: Handle both new and legacy camera systems
+	# Legacy camera system positioning
 	if third_person_camera:
-		# New camera system handles positioning automatically via follow_target
 		pass
 	elif camera_root and camera_target:
-		# Legacy camera system
 		var local_offset = Vector3(0, follow_target_height_offset, camera_back_offset)
 		local_offset = local_offset.rotated(Vector3.UP, rotation.y)
 		camera_root.position = local_offset
