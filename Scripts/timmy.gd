@@ -61,7 +61,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	var input_vector = Vector2(
-		Input.get_axis("right", "left"),
+		Input.get_axis("left", "right"),
 		Input.get_axis("backward", "forward")
 	)
 
@@ -76,11 +76,17 @@ func _physics_process(delta):
 		input_vector = input_vector.normalized()
 		anim_canmove = true
 
-		var move_dir = Vector3(input_vector.x, 0, input_vector.y)
+		# NEW: Camera-relative movement
+		var cam_basis = third_person_camera.global_transform.basis
+		var cam_forward = -cam_basis.z.normalized()
+		var cam_right = cam_basis.x.normalized()
+
+		var move_dir = (cam_forward * input_vector.y + cam_right * input_vector.x).normalized()
+
 		var target_rotation = atan2(move_dir.x, move_dir.z)
 		rotation.y = lerp_angle(rotation.y, target_rotation, rotation_speed * delta)
 
-		direction = Vector3(0, 0, 1).rotated(Vector3.UP, rotation.y)
+		direction = move_dir
 	else:
 		anim_canmove = false
 		direction = Vector3.ZERO
