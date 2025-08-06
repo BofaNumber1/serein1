@@ -42,10 +42,17 @@ height_offset = 0.5
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.6954, 0)
 camera_root = NodePath("../ThirdPersonCamera")
 third_person_camera = NodePath("../ThirdPersonCamera/CameraPivot/CameraArm/SpringArm3D/Camera3D")
+follow_target_height_offset = null
+camera_back_offset = null
+turn_speed = null
+rotation_speed = null
 walk_speed = 5.0
 sprint_speed = 8.0
 jump_velocity = 5.0
 gravity = -10.0
+jump_velocity_delay = null
+idle_trigger_time = null
+idle1_interval = null
 
 [node name="LoadingManager" type="Node3D" parent="."]
 script = ExtResource("3_3d446")

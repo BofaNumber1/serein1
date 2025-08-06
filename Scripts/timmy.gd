@@ -35,6 +35,11 @@ var is_vaulting = false
 @export var jump_velocity := 200.0
 @export var gravity := -500.0
 
+# Jump Timing System
+@export var jump_velocity_delay := 1.2  # Delay in seconds before applying upward velocity
+var jump_timer := 0.0
+var jump_velocity_pending := false
+
 # Idle Voice Line Timer
 var idle_timer := 0.0
 @export var idle_trigger_time := 15.0
@@ -67,14 +72,24 @@ func _physics_process(delta):
 
 	var is_moving = input_vector.length() > 0.1
 	is_sprinting = Input.is_action_pressed("sprint") and is_moving
-	is_vaulting = is_sprinting and Input.is_action_pressed("vault")
+	
+	# Handle vault input with randomization
+	var vault_pressed = is_sprinting and Input.is_action_pressed("vault")
+	if vault_pressed and !is_vaulting:
+		# Randomize vault animation when starting vault
+		current_vault_animation = randi() % 2  # 0 or 1 for two animations
+		is_vaulting = true
+	elif !vault_pressed:
+		is_vaulting = false
 
 	if third_person_camera and third_person_camera.has_method("set_movement_state"):
 		third_person_camera.set_movement_state(is_moving, is_sprinting)
 
 	if is_moving:
 		input_vector = input_vector.normalized()
-		anim_canmove = true
+		# Only allow movement if not in jump startup phase from idle
+		if !jump_velocity_pending:
+			anim_canmove = true
 
 		# NEW: Camera-relative movement
 		var cam_basis = third_person_camera.global_transform.basis
@@ -91,14 +106,28 @@ func _physics_process(delta):
 		anim_canmove = false
 		direction = Vector3.ZERO
 
+	# Jump logic with delayed velocity application
 	if is_on_floor():
-		if Input.is_action_just_pressed("jump") and !anim_canmove:
-			velocity.y = jump_velocity
+		if Input.is_action_just_pressed("jump"):
 			is_jumping = true
+			if !anim_canmove:  # Idle jump - use delay
+				jump_velocity_pending = true
+				jump_timer = 0.0
+			else:  # Running jump - immediate velocity (beam)
+				velocity.y = jump_velocity
 		else:
-			is_jumping = false
+			if !jump_velocity_pending:
+				is_jumping = false
 	else:
 		velocity.y += gravity * delta
+
+	# Handle delayed jump velocity
+	if jump_velocity_pending:
+		jump_timer += delta
+		if jump_timer >= jump_velocity_delay:
+			velocity.y = jump_velocity
+			jump_velocity_pending = false
+			jump_timer = 0.0
 
 	# Animation states
 	animation_tree.set("parameters/conditions/startmove", anim_canmove)
@@ -107,7 +136,19 @@ func _physics_process(delta):
 	animation_tree.set("parameters/conditions/Jump", is_jumping)
 	animation_tree.set("parameters/conditions/Walk", anim_canmove and !is_sprinting)
 	animation_tree.set("parameters/conditions/Beam", is_sprinting and is_jumping)
-	animation_tree.set("parameters/conditions/Vault", is_vaulting)
+	
+	# Randomized vault conditions
+	if is_vaulting:
+		var random_vault = randi() % 2  # 0 or 1
+		if random_vault == 0:
+			animation_tree.set("parameters/conditions/Vault", true)
+			animation_tree.set("parameters/conditions/Vault2", false)
+		else:
+			animation_tree.set("parameters/conditions/Vault", false)
+			animation_tree.set("parameters/conditions/Vault2", true)
+	else:
+		animation_tree.set("parameters/conditions/Vault", false)
+		animation_tree.set("parameters/conditions/Vault2", false)
 
 	var speed = sprint_speed if is_sprinting else walk_speed
 	var horizontal_velocity = direction * speed
