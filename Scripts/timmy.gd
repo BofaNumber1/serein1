@@ -6,7 +6,7 @@ extends CharacterBody3D
 var animation_state
 @onready var footstep = $footstep
 @onready var idle1 = $IdleVoiceLine1
-
+var current_vault_animation = 0
 # Camera Nodes (Legacy - for compatibility with old system)
 @export var camera_root: Node3D
 @export var camera_target: Node3D
@@ -46,9 +46,52 @@ var idle_timer := 0.0
 @export var idle1_interval := 10.0
 var last_idle1_time := 0.0
 
+func _can_vault() -> bool:
+	if !is_on_floor():
+		return false
+
+	var front_ray = $VaultFrontRay
+	var down_ray = $VaultDownRay
+
+	if !front_ray.is_colliding():
+		print("No obstacle in front")
+		return false
+
+	var obstacle = front_ray.get_collider()
+	if obstacle == null:
+		print("Front ray collider is null")
+		return false
+
+	var obstacle_pos = front_ray.get_collision_point()
+	var player_pos = global_transform.origin
+	var height_diff = obstacle_pos.y - player_pos.y
+
+	# Adjust these values to match your scale (0.1)
+	if height_diff < 0.2 or height_diff > 0.6:
+		print("Obstacle height not vaultable:", height_diff)
+		return false
+
+	if !down_ray.is_colliding():
+		print("No landing spot detected")
+		return false
+
+	print("Vault possible!")
+	return true
+
+
 func _ready():
 	animation_state = animation_tree.get("parameters/playback")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+	$VaultFrontRay.position = Vector3(0, 0.4, 0.3)
+	$VaultFrontRay.target_position = Vector3(0, 0.0, 1.0)
+
+	$VaultDownRay.position = Vector3(0, 0.6, 0.6)
+	$VaultDownRay.target_position = Vector3(0, -1.0, 1.0)
+	
+	$VaultFrontRay.enabled = true
+	$VaultDownRay.enabled = true
+
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -73,25 +116,19 @@ func _physics_process(delta):
 	var is_moving = input_vector.length() > 0.1
 	is_sprinting = Input.is_action_pressed("sprint") and is_moving
 	
-	# Handle vault input with randomization
-	var vault_pressed = is_sprinting and Input.is_action_pressed("vault")
+	# Vault input
+	var vault_pressed = Input.is_action_just_pressed("vault")
 	if vault_pressed and !is_vaulting:
-		# Randomize vault animation when starting vault
-		current_vault_animation = randi() % 2  # 0 or 1 for two animations
-		is_vaulting = true
-	elif !vault_pressed:
-		is_vaulting = false
+		trigger_vault()
 
 	if third_person_camera and third_person_camera.has_method("set_movement_state"):
 		third_person_camera.set_movement_state(is_moving, is_sprinting)
 
 	if is_moving:
 		input_vector = input_vector.normalized()
-		# Only allow movement if not in jump startup phase from idle
 		if !jump_velocity_pending:
 			anim_canmove = true
 
-		# NEW: Camera-relative movement
 		var cam_basis = third_person_camera.global_transform.basis
 		var cam_forward = -cam_basis.z.normalized()
 		var cam_right = cam_basis.x.normalized()
@@ -106,14 +143,13 @@ func _physics_process(delta):
 		anim_canmove = false
 		direction = Vector3.ZERO
 
-	# Jump logic with delayed velocity application
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
 			is_jumping = true
-			if !anim_canmove:  # Idle jump - use delay
+			if !anim_canmove:
 				jump_velocity_pending = true
 				jump_timer = 0.0
-			else:  # Running jump - immediate velocity (beam)
+			else:
 				velocity.y = jump_velocity
 		else:
 			if !jump_velocity_pending:
@@ -121,7 +157,6 @@ func _physics_process(delta):
 	else:
 		velocity.y += gravity * delta
 
-	# Handle delayed jump velocity
 	if jump_velocity_pending:
 		jump_timer += delta
 		if jump_timer >= jump_velocity_delay:
@@ -129,26 +164,12 @@ func _physics_process(delta):
 			jump_velocity_pending = false
 			jump_timer = 0.0
 
-	# Animation states
 	animation_tree.set("parameters/conditions/startmove", anim_canmove)
 	animation_tree.set("parameters/conditions/Idle", !anim_canmove)
 	animation_tree.set("parameters/conditions/Run", is_sprinting)
 	animation_tree.set("parameters/conditions/Jump", is_jumping)
 	animation_tree.set("parameters/conditions/Walk", anim_canmove and !is_sprinting)
 	animation_tree.set("parameters/conditions/Beam", is_sprinting and is_jumping)
-	
-	# Randomized vault conditions
-	if is_vaulting:
-		var random_vault = randi() % 2  # 0 or 1
-		if random_vault == 0:
-			animation_tree.set("parameters/conditions/Vault", true)
-			animation_tree.set("parameters/conditions/Vault2", false)
-		else:
-			animation_tree.set("parameters/conditions/Vault", false)
-			animation_tree.set("parameters/conditions/Vault2", true)
-	else:
-		animation_tree.set("parameters/conditions/Vault", false)
-		animation_tree.set("parameters/conditions/Vault2", false)
 
 	var speed = sprint_speed if is_sprinting else walk_speed
 	var horizontal_velocity = direction * speed
@@ -161,7 +182,6 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-	# Idle voice line logic
 	if !is_moving and is_on_floor():
 		idle_timer += delta
 		if idle_timer >= idle_trigger_time:
@@ -172,7 +192,6 @@ func _physics_process(delta):
 	else:
 		idle_timer = 0.0
 
-	# Legacy camera system positioning
 	if third_person_camera:
 		pass
 	elif camera_root and camera_target:
@@ -180,10 +199,26 @@ func _physics_process(delta):
 		local_offset = local_offset.rotated(Vector3.UP, rotation.y)
 		camera_root.position = local_offset
 
+func trigger_vault():
+	if is_vaulting:
+		return
+	current_vault_animation = randi() % 2
+	is_vaulting = true
+	anim_canmove = false
+
+	animation_tree.set("parameters/conditions/Vault", current_vault_animation == 0)
+	animation_tree.set("parameters/conditions/Vault2", current_vault_animation == 1)
+
+	await get_tree().create_timer(1.0).timeout  # Adjust this duration to match your Vault/Vault2 animation
+
+	is_vaulting = false
+	anim_canmove = true
+	animation_tree.set("parameters/conditions/Vault", false)
+	animation_tree.set("parameters/conditions/Vault2", false)
+
 func player_sound():
 	footstep.playing = true
 
-# Camera control functions for the new system
 func set_camera_over_right_shoulder():
 	if third_person_camera and third_person_camera.has_method("set_over_shoulder_right"):
 		third_person_camera.set_over_shoulder_right()
