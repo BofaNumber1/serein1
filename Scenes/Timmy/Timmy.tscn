@@ -1755,6 +1755,13 @@ metadata/extras = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.00877)
 shape = SubResource("CapsuleShape3D_m0b62")
 
+[node name="VaultRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, -6.00877)
+target_position = Vector3(0, 0, 50)
+collision_mask = 1
+collide_with_areas = false
+collide_with_bodies = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": ExtResource("4_2euar")
