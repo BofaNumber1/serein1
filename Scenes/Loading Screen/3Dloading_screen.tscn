@@ -1,7 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbhgqwhsncjxm"]
+[gd_scene load_steps=12 format=3 uid="uid://bbhgqwhsncjxm"]
 
 [ext_resource type="PackedScene" uid="uid://dibvhemwm7yk1" path="res://Scenes/Timmy/Timmy.tscn" id="1_ox256"]
-[ext_resource type="PackedScene" uid="uid://vpaw2lxmpag0" path="res://Scenes/ThirdPersonCamera.tscn" id="1_slj20"]
 [ext_resource type="Script" uid="uid://c2orjs7miuocx" path="res://Scripts/3Dloading_screen.gd" id="3_3d446"]
 [ext_resource type="AudioStream" uid="uid://co2b3ew3cetls" path="res://Audio/LoadingScreenLoop.mp3" id="4_nop8t"]
 [ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="5_slj20"]
@@ -31,21 +30,7 @@ sky = SubResource("Sky_50ct6")
 
 [node name="Loading Screen" type="Node3D"]
 
-[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("follow_target", "camera") instance=ExtResource("1_slj20")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.695, 23.315)
-follow_target = NodePath("../Timmy")
-camera = NodePath("CameraPivot/CameraArm/SpringArm3D/Camera3D")
-distance_behind = -30.0
-height_offset = 0.5
-
-[node name="Timmy" parent="." node_paths=PackedStringArray("camera_root", "third_person_camera") instance=ExtResource("1_ox256")]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.6954, 0)
-camera_root = NodePath("../ThirdPersonCamera")
-third_person_camera = NodePath("../ThirdPersonCamera/CameraPivot/CameraArm/SpringArm3D/Camera3D")
-walk_speed = 5.0
-sprint_speed = 8.0
-jump_velocity = 5.0
-gravity = -10.0
+[node name="Timmy" parent="." instance=ExtResource("1_ox256")]
 
 [node name="LoadingManager" type="Node3D" parent="."]
 script = ExtResource("3_3d446")
@@ -121,5 +106,3 @@ environment = SubResource("Environment_03iyy")
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.573576, 0.45212, -0.68308, 0, 0.833886, 0.551937, 0.819152, -0.316578, 0.478297, 0, 0, 0)
 shadow_enabled = true
-
-[editable path="ThirdPersonCamera"]

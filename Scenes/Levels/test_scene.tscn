@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://7vpmysv6700k"]
+[gd_scene load_steps=10 format=3 uid="uid://7vpmysv6700k"]
 
 [ext_resource type="PackedScene" uid="uid://vpaw2lxmpag0" path="res://Scenes/ThirdPersonCamera.tscn" id="1_dv2c3"]
 [ext_resource type="PackedScene" uid="uid://dibvhemwm7yk1" path="res://Scenes/Timmy/Timmy.tscn" id="1_r5l72"]
@@ -20,25 +20,17 @@ sky = SubResource("Sky_50ct6")
 
 [sub_resource type="BoxMesh" id="BoxMesh_dv2c3"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dv2c3"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_a1spv"]
-
 [node name="TestScene" type="Node3D"]
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("follow_target", "camera") instance=ExtResource("1_dv2c3")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.6954, 23.315)
 follow_target = NodePath("../Timmy")
-camera = NodePath("CameraPivot/CameraArm/SpringArm3D/Camera3D")
+camera = NodePath("CameraPivot/CameraArm/Camera3D")
 distance_behind = -30.0
 height_offset = 0.5
 
-[node name="Timmy" parent="." node_paths=PackedStringArray("camera_root", "third_person_camera") instance=ExtResource("1_r5l72")]
+[node name="Timmy" parent="." instance=ExtResource("1_r5l72")]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.6954, 0)
-collision_layer = 3
-collision_mask = 3
-camera_root = NodePath("../ThirdPersonCamera")
-third_person_camera = NodePath("../ThirdPersonCamera/CameraPivot/CameraArm/SpringArm3D/Camera3D")
 walk_speed = 5.0
 sprint_speed = 8.0
 jump_velocity = 5.0
@@ -61,25 +53,8 @@ environment = SubResource("Environment_ak5v8")
 transform = Transform3D(0.573576, 0.45212, -0.68308, 0, 0.833886, 0.551937, 0.819152, -0.316578, 0.478297, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Box2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.0753, 1.50482, 0.04301)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
 mesh = SubResource("BoxMesh_dv2c3")
-skeleton = NodePath("../Box")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Box2"]
-physics_material_override = SubResource("PhysicsMaterial_dv2c3")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2/StaticBody3D"]
-shape = SubResource("BoxShape3D_a1spv")
-
-[node name="Box" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 8, 0.361663, 0)
-mesh = SubResource("BoxMesh_dv2c3")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Box"]
-physics_material_override = SubResource("PhysicsMaterial_dv2c3")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box/StaticBody3D"]
-shape = SubResource("BoxShape3D_a1spv")
 
 [editable path="ThirdPersonCamera"]
