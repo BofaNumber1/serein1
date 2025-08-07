@@ -6,7 +6,6 @@ extends CharacterBody3D
 var animation_state
 @onready var footstep = $footstep
 @onready var idle1 = $IdleVoiceLine1
-@onready var vault_raycast = $VaultRayCast
 
 # Camera Nodes (Legacy - for compatibility with old system)
 @export var camera_root: Node3D        # The top Node3D controlling camera rig position relative to player
@@ -31,14 +30,6 @@ var is_sprinting = false
 var is_jumping = false
 var is_vaulting = false
 
-# Vault Detection Parameters
-@export var vault_min_height := 20.0  # Minimum height to vault over
-@export var vault_max_height := 80.0  # Maximum height to vault over
-var can_vault = false
-var is_vaulting_active = false  # Tracks if vault animation is currently playing
-var original_collision_layer = 0
-var original_collision_mask = 0
-
 # Input (Tank Style)
 var move_input = 0.0  # Forward/backward movement
 var turn_input = 0.0  # Left/right rotation
@@ -58,10 +49,6 @@ var last_idle1_time := 0.0
 func _ready():
 	animation_state = animation_tree.get("parameters/playback")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	# Store original collision settings
-	original_collision_layer = collision_layer
-	original_collision_mask = collision_mask
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -87,19 +74,7 @@ func _physics_process(delta):
 	# Determine if we're moving or sprinting
 	var is_moving = abs(move_input) > 0.0
 	is_sprinting = Input.is_action_pressed("sprint") and is_moving
-	
-	# Vault Detection System
-	check_vault_availability()
-	var should_start_vault = is_sprinting and Input.is_action_pressed("vault") and can_vault and not is_vaulting_active
-	
-	# Handle vault state transitions
-	if should_start_vault and not is_vaulting:
-		start_vault()
-	
-	# Check if vault animation is still playing
-	update_vault_state()
-	
-	is_vaulting = is_vaulting_active
+	is_vaulting = is_sprinting and Input.is_action_pressed("vault")
 
 	# Update camera state if using new camera system
 	if third_person_camera and third_person_camera.has_method("set_movement_state"):
@@ -189,51 +164,3 @@ func set_camera_center():
 func set_camera_aiming(is_aiming: bool):
 	if third_person_camera and third_person_camera.has_method("set_aiming"):
 		third_person_camera.set_aiming(is_aiming)
-
-func check_vault_availability():
-	can_vault = false
-	
-	if not vault_raycast:
-		return
-	
-	# Raycast automatically points forward in local space, no need to manually rotate
-	vault_raycast.force_raycast_update()
-	
-	if vault_raycast.is_colliding():
-		var collision_point = vault_raycast.get_collision_point()
-		var collider = vault_raycast.get_collider()
-		
-		# Check if the object is at a vaultable height
-		var height_difference = collision_point.y - global_position.y
-		
-		# Only vault if the object is within the acceptable height range
-		if height_difference >= vault_min_height and height_difference <= vault_max_height:
-			# Additional check: make sure the object isn't too wide/long to vault over
-			# This prevents vaulting over walls or very large objects
-			if collider and collider.has_method("get_aabb"):
-				var aabb = collider.get_aabb()
-				# If the object's depth (in movement direction) is reasonable, allow vaulting
-				if aabb.size.z <= 100.0:  # Max vault distance in units
-					can_vault = true
-
-func start_vault():
-	is_vaulting_active = true
-	
-	# Temporarily disable collision with vault obstacles by changing collision layer
-	# This allows Timmy to pass through the object he's vaulting over
-	collision_mask &= ~(1 << 0)  # Remove collision with layer 0 (default layer)
-	
-func update_vault_state():
-	if is_vaulting_active:
-		# Check if vault animation is still playing by monitoring the animation state
-		var current_state = animation_state.get_current_node()
-		
-		# If we're no longer in vault state, restore collision
-		if current_state != "Vault" or not animation_player.is_playing():
-			end_vault()
-
-func end_vault():
-	if is_vaulting_active:
-		is_vaulting_active = false
-		# Restore original collision settings
-		collision_mask = original_collision_mask
