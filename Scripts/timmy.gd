@@ -19,8 +19,8 @@ var current_vault_animation = 0
 @export var camera_back_offset := -4.0
 
 # Movement and rotation
-@export var turn_speed := 10
-@export var rotation_speed := 6.0
+@export var turn_speed := 4
+@export var rotation_speed := 5
 
 # Player Parameters
 var direction = Vector3()
@@ -30,10 +30,10 @@ var is_jumping = false
 var is_vaulting = false
 
 # Movement speeds
-@export var walk_speed := 55.0
-@export var sprint_speed := 650.0
-@export var jump_velocity := 200.0
-@export var gravity := -500.0
+@export var walk_speed := 5
+@export var sprint_speed := 30.0
+@export var jump_velocity := 20.0
+@export var gravity := -200.0
 
 # Jump Timing System
 @export var jump_velocity_delay := 1.2  # Delay in seconds before applying upward velocity
@@ -46,17 +46,20 @@ var idle_timer := 0.0
 @export var idle1_interval := 10.0
 var last_idle1_time := 0.0
 
-# === SIMPLE VAULT SYSTEM ===
+# === VAULT DETECTION SYSTEM ===
 @export_group("Vault Settings")
 @export var vault_detection_distance := 20.0  # Adjusted for 0.1 scale
 @export var table_height_min := 8.0  # Min table height in scaled units
 @export var table_height_max := 12.0  # Max table height in scaled units
 
-# Vault raycasts (to be added manually to scene)
-@onready var vault_forward: RayCast3D = $VaultForward
-@onready var vault_down: RayCast3D = $VaultDown
+# Vault Detection Raycasts
+@export var vault_raycast: RayCast3D
+@export var vault_height_raycast: RayCast3D
+@export var vault_clearance_raycast: RayCast3D
 
-var can_vault_table = false
+# Vault Detection Variables
+var can_vault = false
+var vault_object = null
 
 
 func _ready():
@@ -88,14 +91,17 @@ func _physics_process(delta):
 
 	var is_moving = input_vector.length() > 0.1
 	is_sprinting = Input.is_action_pressed("sprint") and is_moving
-	
-	# Check for table vaulting only when sprinting straight forward
-	check_table_vault()
-	
-	# Vault input - only works when sprinting straight ahead
 	var vault_pressed = Input.is_action_just_pressed("vault")
-	if vault_pressed and can_vault_table and is_sprinting:
-		trigger_table_vault()
+	
+	# Update vault detection
+	can_vault = check_vault_conditions()
+	
+	# Check vault input with detection system
+	if vault_pressed and is_sprinting and !is_vaulting and can_vault:
+		print("Triggering vault!")
+		trigger_vault()
+	elif vault_pressed and is_sprinting and !is_vaulting:
+		print("Vault pressed but can_vault is false")
 
 	if third_person_camera and third_person_camera.has_method("set_movement_state"):
 		third_person_camera.set_movement_state(is_moving, is_sprinting)
@@ -147,6 +153,10 @@ func _physics_process(delta):
 	animation_tree.set("parameters/conditions/Jump", is_jumping)
 	animation_tree.set("parameters/conditions/Walk", anim_canmove and !is_sprinting)
 	animation_tree.set("parameters/conditions/Beam", is_sprinting and is_jumping)
+	# Reset vault conditions when not vaulting to prevent auto-triggering
+	if !is_vaulting:
+		animation_tree.set("parameters/conditions/Vault", false)
+		animation_tree.set("parameters/conditions/Vault2", false)
 
 	var speed = sprint_speed if is_sprinting else walk_speed
 	var horizontal_velocity = direction * speed
@@ -179,83 +189,62 @@ func _physics_process(delta):
 		camera_root.position = local_offset
 
 
-func check_table_vault():
-	"Check if there's a table ahead that can be vaulted - only when sprinting forward"
-	can_vault_table = false
+# === VAULT DETECTION SYSTEM ===
+func check_vault_conditions() -> bool:
+	# If raycasts aren't set up yet, allow vaulting (fallback to old behavior)
+	if !vault_raycast or !vault_height_raycast or !vault_clearance_raycast:
+		print("Vault raycasts not set up - allowing vault anyway")
+		return true
 	
-	# Only check when sprinting and moving forward
-	if !is_sprinting or is_vaulting or !is_on_floor():
-		return
+	print("Checking vault conditions...")
 	
-	# Make sure we're moving mostly forward (not sideways)
-	var input_vector = Vector2(
-		Input.get_axis("left", "right"),
-		Input.get_axis("backward", "forward")
-	)
+	# Enable the raycasts
+	vault_raycast.enabled = true
+	vault_height_raycast.enabled = true
+	vault_clearance_raycast.enabled = true
 	
-	# Only allow vaulting when moving straight forward (minimal sideways input)
-	if abs(input_vector.x) > 0.3 or input_vector.y <= 0.7:
-		return
+	# Check if there's an obstacle in front
+	if !vault_raycast.is_colliding():
+		print("No collision detected by vault_raycast")
+		return false
 	
-	# Update raycast direction based on player facing
-	var forward_dir = -transform.basis.z
-	vault_forward.target_position = forward_dir * vault_detection_distance
-	vault_forward.force_raycast_update()
+	print("Vault raycast is colliding")
 	
-	# Check if we hit something
-	if !vault_forward.is_colliding():
-		return
+	var hit_object = vault_raycast.get_collider()
+	if !hit_object:
+		print("No hit object found")
+		return false
 	
-	var hit_point = vault_forward.get_collision_point()
+	print("Hit object: ", hit_object.name)
 	
-	# Check if it's table height by casting down from above the obstacle
-	vault_down.global_position = hit_point + Vector3.UP * 15.0  # Start above potential table
-	vault_down.target_position = Vector3.DOWN * 25.0  # Cast down to find top
-	vault_down.force_raycast_update()
+	# Check if the obstacle is the right height for vaulting
+	var hit_point = vault_raycast.get_collision_point()
+	var player_y = global_position.y
+	var obstacle_height = hit_point.y - player_y
 	
-	if vault_down.is_colliding():
-		var table_top = vault_down.get_collision_point()
-		var table_height = table_top.y - global_position.y
-		
-		# Check if it's within table height range
-		if table_height >= table_height_min and table_height <= table_height_max:
-			can_vault_table = true
+	print("Obstacle height: ", obstacle_height, " Min: ", table_height_min * 0.1, " Max: ", table_height_max * 0.1)
+	
+	# Check if height is within vaultable range (scaled for 0.1 player)
+	if obstacle_height < table_height_min * 0.1 or obstacle_height > table_height_max * 0.1:
+		print("Height outside vaultable range")
+		return false
+	
+	print("Height is good for vaulting")
+	
+	# Check if there's clearance above the obstacle for landing
+	vault_clearance_raycast.global_position = hit_point + Vector3(0, obstacle_height + 0.2, 0)
+	vault_clearance_raycast.force_raycast_update()
+	
+	if vault_clearance_raycast.is_colliding():
+		print("No clearance above obstacle")
+		return false  # Not enough clearance above
+	
+	vault_object = hit_object
+	print("Vault conditions met!")
+	return true
 
 
-func trigger_table_vault():
-	"Perform a table vault - randomly pick Vault or Vault2"
-	if is_vaulting:
-		return
-	
-	is_vaulting = true
-	anim_canmove = false
-	
-	# Randomly choose between the two vault animations
-	var use_vault2 = randi() % 2 == 1
-	
-	# Reset conditions and set the chosen one
-	animation_tree.set("parameters/conditions/Vault", false)
-	animation_tree.set("parameters/conditions/Vault2", false)
-	
-	if use_vault2:
-		animation_tree.set("parameters/conditions/Vault2", true)
-		current_vault_animation = 1
-	else:
-		animation_tree.set("parameters/conditions/Vault", true)
-		current_vault_animation = 0
-	
-	# Wait for vault animation to complete
-	await get_tree().create_timer(1.0).timeout
-	
-	# Reset vault state
-	is_vaulting = false
-	anim_canmove = true
-	animation_tree.set("parameters/conditions/Vault", false)
-	animation_tree.set("parameters/conditions/Vault2", false)
-	can_vault_table = false
-
-
-# Legacy vault function (kept for compatibility)
+# === VAULT FUNCTIONS ===
 func trigger_vault():
 	if is_vaulting:
 		return
@@ -274,7 +263,7 @@ func trigger_vault():
 	animation_tree.set("parameters/conditions/Vault2", false)
 
 
-# Audio and Camera Functions
+# === AUDIO AND CAMERA FUNCTIONS ===
 func player_sound():
 	footstep.playing = true
 

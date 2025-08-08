@@ -99,27 +99,36 @@ func load_game_scene_async() -> void:
 	ResourceLoader.load_threaded_request(scene_path)
 	await get_tree().process_frame
 
-	while true:
+	var loading_complete = false
+	var artificial_progress = 0.0
+	var total_loading_time = 6.0  # How long you want the loading to take in seconds
+	var elapsed_time = 0.0
+
+	while not loading_complete or artificial_progress < 100.0:
 		var progress = []
 		var status = ResourceLoader.load_threaded_get_status(scene_path, progress)
 
-		if progress.size() == 2 and progress[1] > 0:
-			var pct := float(progress[0]) / float(progress[1]) * 100.0
-			progress_bar.value = pct
-
+		# Check if actual loading is done
 		if status == ResourceLoader.THREAD_LOAD_LOADED:
+			loading_complete = true
+
+		# Update elapsed time
+		elapsed_time += 0.016  # Roughly 60 FPS frame time
+		
+		# Calculate progress based on elapsed time
+		if not loading_complete:
+			# Don't let progress go past 95% until loading is actually complete
+			artificial_progress = min((elapsed_time / total_loading_time) * 95.0, 95.0)
+		else:
+			# Once loading is complete, allow progress to reach 100%
+			artificial_progress = min((elapsed_time / total_loading_time) * 100.0, 100.0)
+		
+		progress_bar.value = artificial_progress
+		
+		# Break when we reach 100%
+		if artificial_progress >= 100.0:
 			break
 
-		await get_tree().process_frame
-
-	# Now loading is done, animate progress bar from current value to 100 over fade duration (2 sec)
-	var start_val = progress_bar.value
-	var fade_duration = 2.0
-	var timer = 0.0
-
-	while timer < fade_duration:
-		timer += get_process_delta_time()
-		progress_bar.value = lerp(start_val, 100.0, timer / fade_duration)
 		await get_tree().process_frame
 
 	# Fade out screen and music, progress bar is full now

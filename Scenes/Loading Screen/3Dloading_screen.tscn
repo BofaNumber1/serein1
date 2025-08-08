@@ -32,17 +32,16 @@ sky = SubResource("Sky_50ct6")
 [node name="Loading Screen" type="Node3D"]
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("follow_target", "camera") instance=ExtResource("1_slj20")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.695, 23.315)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 follow_target = NodePath("../Timmy")
 camera = NodePath("CameraPivot/CameraArm/SpringArm3D/Camera3D")
-distance_behind = -30.0
-height_offset = 0.5
+distance_behind = -5.0
+height_offset = 0.1
 
 [node name="Timmy" parent="." node_paths=PackedStringArray("camera_root", "third_person_camera") instance=ExtResource("1_ox256")]
 transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.6954, 0)
 camera_root = NodePath("../ThirdPersonCamera")
 third_person_camera = NodePath("../ThirdPersonCamera/CameraPivot/CameraArm/SpringArm3D/Camera3D")
-walk_speed = 5.0
 sprint_speed = 8.0
 jump_velocity = 5.0
 gravity = -10.0
