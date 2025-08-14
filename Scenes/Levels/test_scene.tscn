@@ -33,10 +33,11 @@ camera = NodePath("CameraPivot/CameraArm/SpringArm3D/Camera3D")
 distance_behind = -34.175
 
 [node name="Timmy" parent="." node_paths=PackedStringArray("camera_root", "third_person_camera") instance=ExtResource("1_r5l72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.33866)
 camera_root = NodePath("..")
 third_person_camera = NodePath("../ThirdPersonCamera/CameraPivot/CameraArm/SpringArm3D/Camera3D")
-camera_back_offset = -14.725
 sprint_speed = 10.0
+jump_velocity = 15.0
 
 [node name="floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
@@ -68,7 +69,7 @@ physics_material_override = SubResource("PhysicsMaterial_dv2c3")
 shape = SubResource("BoxShape3D_a1spv")
 
 [node name="Box" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013914, 0)
+transform = Transform3D(1.985, 0, 0, 0, 1.87041, 3.84567, 0, -0.664664, 10.822, 0, 0.013914, 0)
 layers = 3
 mesh = SubResource("BoxMesh_dv2c3")
 
