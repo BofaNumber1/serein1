@@ -1,8 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://7vpmysv6700k"]
+[gd_scene load_steps=25 format=3 uid="uid://7vpmysv6700k"]
 
 [ext_resource type="PackedScene" uid="uid://vpaw2lxmpag0" path="res://Scenes/ThirdPersonCamera.tscn" id="1_dv2c3"]
 [ext_resource type="PackedScene" uid="uid://dibvhemwm7yk1" path="res://Scenes/Timmy/Timmy.tscn" id="1_r5l72"]
+[ext_resource type="Script" uid="uid://cfu5a1m5kgohl" path="res://Scenes/Levels/level.gd" id="1_utwxg"]
 [ext_resource type="Texture2D" uid="uid://84gh6yq2ipgh" path="res://free_-_skybox_anime_sky_0.jpg" id="2_2u58p"]
+[ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="5_56hgn"]
+[ext_resource type="Script" uid="uid://d0od5yf4ie52d" path="res://Scripts/audio_control.gd" id="6_shcqj"]
+[ext_resource type="Script" uid="uid://67jmp2fbxh2w" path="res://Scripts/full_screen_control.gd" id="7_4kqls"]
+[ext_resource type="Script" uid="uid://ctxwo4g3piylf" path="res://Scripts/scale_control.gd" id="8_02b08"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hb2xm"]
 
@@ -24,7 +29,30 @@ sky = SubResource("Sky_50ct6")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a1spv"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8qgji"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u0ded"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nywed"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u4baa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_idmnq"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_wuae5"]
+color = Color(1, 1, 1, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_7n4yk"]
+color = Color(0.164706, 0.788235, 0.94902, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_kl2mb"]
+color = Color(0.164706, 0.788235, 0.94902, 1)
+thickness = 6
+
 [node name="TestScene" type="Node3D"]
+script = ExtResource("1_utwxg")
 
 [node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("follow_target", "camera") instance=ExtResource("1_dv2c3")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
@@ -81,5 +109,210 @@ transform = Transform3D(1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 0, 0, 0)
 shape = SubResource("BoxShape3D_a1spv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="Settings" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -300.0
+offset_right = 384.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Back" type="Button" parent="Settings"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -264.0
+offset_top = -76.0
+offset_right = 264.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_neighbor_top = NodePath("../Start")
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("5_56hgn")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8qgji")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_u0ded")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nywed")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u4baa")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_idmnq")
+text = "Back"
+
+[node name="Settings" type="Label" parent="Settings"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 30.0
+offset_bottom = 68.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("5_56hgn")
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Settings"]
+layout_mode = 0
+offset_left = -30.0
+offset_top = 158.0
+offset_right = 161.0
+offset_bottom = 192.0
+theme_override_fonts/font = ExtResource("5_56hgn")
+theme_override_font_sizes/font_size = 18
+text = "Voice Lines"
+horizontal_alignment = 1
+
+[node name="AudioControl" type="HSlider" parent="Settings/Label2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 66.0
+offset_top = -27.0
+offset_right = 429.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_wuae5")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_7n4yk")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_kl2mb")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("6_shcqj")
+audio_bus_name = "VoiceLines"
+
+[node name="Label" type="Label" parent="Settings"]
+layout_mode = 2
+offset_left = -69.0
+offset_top = 66.0
+offset_right = 189.0
+offset_bottom = 104.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_56hgn")
+theme_override_font_sizes/font_size = 32
+text = "Music"
+horizontal_alignment = 1
+
+[node name="AudioControl" type="HSlider" parent="Settings/Label"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 73.5
+offset_top = -22.0
+offset_right = 436.5
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_wuae5")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_7n4yk")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_kl2mb")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("6_shcqj")
+audio_bus_name = "Music"
+
+[node name="SFX" type="Label" parent="Settings"]
+layout_mode = 2
+offset_left = -69.0
+offset_top = 108.0
+offset_right = 189.0
+offset_bottom = 146.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_56hgn")
+theme_override_font_sizes/font_size = 32
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="AudioControl2" type="HSlider" parent="Settings/SFX"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 74.0
+offset_top = -23.0
+offset_right = 437.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_wuae5")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_7n4yk")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_kl2mb")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("6_shcqj")
+audio_bus_name = "SFX"
+
+[node name="FullScreenControl" type="CheckButton" parent="Settings"]
+layout_mode = 2
+offset_top = 188.0
+offset_right = 258.0
+offset_bottom = 230.0
+theme_override_fonts/font = ExtResource("5_56hgn")
+theme_override_font_sizes/font_size = 28
+text = "Fullscreen"
+script = ExtResource("7_4kqls")
+
+[node name="ScaleControl" type="OptionButton" parent="Settings"]
+layout_mode = 2
+offset_left = 211.0
+offset_top = 228.0
+offset_right = 469.0
+offset_bottom = 270.0
+theme_override_fonts/font = ExtResource("5_56hgn")
+theme_override_font_sizes/font_size = 28
+selected = 0
+item_count = 4
+popup/item_0/text = "100"
+popup/item_0/id = 0
+popup/item_1/text = "75"
+popup/item_1/id = 1
+popup/item_2/text = "50"
+popup/item_2/id = 2
+popup/item_3/text = "25"
+popup/item_3/id = 3
+script = ExtResource("8_02b08")
+
+[node name="ScaleControlLabel" type="Label" parent="Settings"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -3.0
+offset_top = -70.0
+offset_right = 175.0
+offset_bottom = -32.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_56hgn")
+theme_override_font_sizes/font_size = 30
+text = "3D Scale"
+horizontal_alignment = 1
+
+[connection signal="value_changed" from="Settings/Label2/AudioControl" to="Settings/Label2/AudioControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Settings/Label/AudioControl" to="Settings/Label/AudioControl" method="_on_value_changed"]
+[connection signal="value_changed" from="Settings/SFX/AudioControl2" to="Settings/SFX/AudioControl2" method="_on_value_changed"]
+[connection signal="toggled" from="Settings/FullScreenControl" to="Settings/FullScreenControl" method="_on_toggled"]
+[connection signal="item_selected" from="Settings/ScaleControl" to="Settings/ScaleControl" method="_on_item_selected"]
 
 [editable path="ThirdPersonCamera"]

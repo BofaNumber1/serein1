@@ -1588,17 +1588,20 @@ stream = ExtResource("6_2euar")
 stream = ExtResource("7_lkjcv")
 
 [node name="VaultRaycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.817821, 0.272001)
 target_position = Vector3(0, 0, 0.2)
 collision_mask = 3
 hit_from_inside = true
 collide_with_areas = true
 
 [node name="VaultHeightRaycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.817821, 0.272001)
 target_position = Vector3(0, 0.2, 0)
 collision_mask = 3
 hit_from_inside = true
 
 [node name="VaultClearanceRaycast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.817821, 0.272001)
 target_position = Vector3(0, -0.3, 0)
 collision_mask = 3
 hit_from_inside = true
