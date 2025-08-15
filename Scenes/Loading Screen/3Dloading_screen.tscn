@@ -31,21 +31,6 @@ sky = SubResource("Sky_50ct6")
 
 [node name="Loading Screen" type="Node3D"]
 
-[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("follow_target", "camera") instance=ExtResource("1_slj20")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-follow_target = NodePath("../Timmy")
-camera = NodePath("CameraPivot/CameraArm/SpringArm3D/Camera3D")
-distance_behind = -5.0
-height_offset = 0.1
-
-[node name="Timmy" parent="." node_paths=PackedStringArray("camera_root", "third_person_camera") instance=ExtResource("1_ox256")]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.6954, 0)
-camera_root = NodePath("../ThirdPersonCamera")
-third_person_camera = NodePath("../ThirdPersonCamera/CameraPivot/CameraArm/SpringArm3D/Camera3D")
-sprint_speed = 8.0
-jump_velocity = 5.0
-gravity = -10.0
-
 [node name="LoadingManager" type="Node3D" parent="."]
 script = ExtResource("3_3d446")
 
@@ -120,5 +105,18 @@ environment = SubResource("Environment_03iyy")
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.573576, 0.45212, -0.68308, 0, 0.833886, 0.551937, 0.819152, -0.316578, 0.478297, 0, 0, 0)
 shadow_enabled = true
+
+[node name="ThirdPersonCamera" parent="." node_paths=PackedStringArray("follow_target", "camera") instance=ExtResource("1_slj20")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+follow_target = NodePath("../Timmy")
+camera = NodePath("CameraPivot/CameraArm/SpringArm3D/Camera3D")
+distance_behind = -34.175
+
+[node name="Timmy" parent="." node_paths=PackedStringArray("camera_root", "third_person_camera") instance=ExtResource("1_ox256")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.33866)
+camera_root = NodePath("../ThirdPersonCamera")
+third_person_camera = NodePath("../ThirdPersonCamera/CameraPivot/CameraArm/SpringArm3D/Camera3D")
+sprint_speed = 10.0
+jump_velocity = 15.0
 
 [editable path="ThirdPersonCamera"]
