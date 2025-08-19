@@ -1,33 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://7vpmysv6700k"]
+[gd_scene load_steps=20 format=3 uid="uid://7vpmysv6700k"]
 
 [ext_resource type="PackedScene" uid="uid://vpaw2lxmpag0" path="res://Scenes/ThirdPersonCamera.tscn" id="1_dv2c3"]
 [ext_resource type="PackedScene" uid="uid://dibvhemwm7yk1" path="res://Scenes/Timmy/Timmy.tscn" id="1_r5l72"]
 [ext_resource type="Script" uid="uid://cfu5a1m5kgohl" path="res://Scenes/Levels/level.gd" id="1_utwxg"]
-[ext_resource type="Texture2D" uid="uid://84gh6yq2ipgh" path="res://free_-_skybox_anime_sky_0.jpg" id="2_2u58p"]
 [ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="5_56hgn"]
 [ext_resource type="Script" uid="uid://d0od5yf4ie52d" path="res://Scripts/audio_control.gd" id="6_shcqj"]
 [ext_resource type="Script" uid="uid://67jmp2fbxh2w" path="res://Scripts/full_screen_control.gd" id="7_4kqls"]
 [ext_resource type="Script" uid="uid://ctxwo4g3piylf" path="res://Scripts/scale_control.gd" id="8_02b08"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_hb2xm"]
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ak5v8"]
-
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hb2xm"]
-panorama = ExtResource("2_2u58p")
-
-[sub_resource type="Sky" id="Sky_50ct6"]
-sky_material = SubResource("PanoramaSkyMaterial_hb2xm")
-
-[sub_resource type="Environment" id="Environment_ak5v8"]
-background_mode = 2
-sky = SubResource("Sky_50ct6")
-
-[sub_resource type="BoxMesh" id="BoxMesh_dv2c3"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dv2c3"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_a1spv"]
+[ext_resource type="PackedScene" uid="uid://b7osrmj1vq1ny" path="res://city.tscn" id="9_56hgn"]
+[ext_resource type="Material" uid="uid://m80rmki4fbox" path="res://sky/examples/night_sky.tres" id="9_shcqj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8qgji"]
 
@@ -51,6 +32,19 @@ thickness = 6
 color = Color(0.164706, 0.788235, 0.94902, 1)
 thickness = 6
 
+[sub_resource type="Sky" id="Sky_ieg05"]
+sky_material = ExtResource("9_shcqj")
+
+[sub_resource type="Environment" id="Environment_4kqls"]
+background_mode = 2
+sky = SubResource("Sky_ieg05")
+ambient_light_source = 2
+ambient_light_color = Color(0.45098, 0.333333, 0.309804, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.2
+
 [node name="TestScene" type="Node3D"]
 script = ExtResource("1_utwxg")
 
@@ -67,48 +61,9 @@ third_person_camera = NodePath("../ThirdPersonCamera/CameraPivot/CameraArm/Sprin
 sprint_speed = 10.0
 jump_velocity = 15.0
 
-[node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
-mesh = SubResource("PlaneMesh_hb2xm")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_ak5v8")
-debug_color = Color(0.913725, 0, 0, 1)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ak5v8")
-
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.573576, 0.45212, -0.68308, 0, 0.833886, 0.551937, 0.819152, -0.316578, 0.478297, 0, 0, 0)
 shadow_enabled = true
-
-[node name="Box2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 10.0753, 1.50482, 0.04301)
-layers = 3
-mesh = SubResource("BoxMesh_dv2c3")
-skeleton = NodePath("../Box")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Box2"]
-physics_material_override = SubResource("PhysicsMaterial_dv2c3")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2/StaticBody3D"]
-shape = SubResource("BoxShape3D_a1spv")
-
-[node name="Box" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.985, 0, 0, 0, 1.87041, 3.84567, 0, -0.664664, 10.822, 0, 0.013914, 0)
-layers = 3
-mesh = SubResource("BoxMesh_dv2c3")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Box"]
-physics_material_override = SubResource("PhysicsMaterial_dv2c3")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Box/StaticBody3D"]
-transform = Transform3D(1.01, 0, 0, 0, 1.01, 0, 0, 0, 1.01, 0, 0, 0)
-shape = SubResource("BoxShape3D_a1spv")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 
 [node name="Settings" type="Panel" parent="."]
 visible = false
@@ -308,6 +263,11 @@ theme_override_fonts/font = ExtResource("5_56hgn")
 theme_override_font_sizes/font_size = 30
 text = "3D Scale"
 horizontal_alignment = 1
+
+[node name="cityroot" parent="." instance=ExtResource("9_56hgn")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4kqls")
 
 [connection signal="value_changed" from="Settings/Label2/AudioControl" to="Settings/Label2/AudioControl" method="_on_value_changed"]
 [connection signal="value_changed" from="Settings/Label/AudioControl" to="Settings/Label/AudioControl" method="_on_value_changed"]

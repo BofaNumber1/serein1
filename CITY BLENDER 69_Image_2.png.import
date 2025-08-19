@@ -3,9 +3,10 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8eo8apo8m46v"
-path="res://.godot/imported/CITY BLENDER 69_Image_2.png-83d0c8832eddede792273e4031be8a27.ctex"
+path.s3tc="res://.godot/imported/CITY BLENDER 69_Image_2.png-83d0c8832eddede792273e4031be8a27.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "8a16f686dac21e8de66127ced7a62eba"
@@ -14,11 +15,11 @@ generator_parameters={
 [deps]
 
 source_file="res://CITY BLENDER 69_Image_2.png"
-dest_files=["res://.godot/imported/CITY BLENDER 69_Image_2.png-83d0c8832eddede792273e4031be8a27.ctex"]
+dest_files=["res://.godot/imported/CITY BLENDER 69_Image_2.png-83d0c8832eddede792273e4031be8a27.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
@@ -34,4 +35,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
