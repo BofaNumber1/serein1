@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://bbhgqwhsncjxm"]
 
 [ext_resource type="PackedScene" uid="uid://dibvhemwm7yk1" path="res://Scenes/Timmy/Timmy.tscn" id="1_ox256"]
-[ext_resource type="PackedScene" uid="uid://vpaw2lxmpag0" path="res://Scenes/ThirdPersonCamera.tscn" id="1_slj20"]
+[ext_resource type="PackedScene" uid="uid://vpaw2lxmpag0" path="res://Scenes/Timmy/ThirdPersonCamera.tscn" id="1_slj20"]
 [ext_resource type="Script" uid="uid://c2orjs7miuocx" path="res://Scripts/3Dloading_screen.gd" id="3_3d446"]
 [ext_resource type="AudioStream" uid="uid://co2b3ew3cetls" path="res://Audio/LoadingScreenLoop.mp3" id="4_nop8t"]
 [ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="5_slj20"]
-[ext_resource type="Texture2D" uid="uid://dounf8jgmc1kl" path="res://kloppenheim_02_puresky_2k.hdr" id="5_wof2g"]
+[ext_resource type="Texture2D" uid="uid://doyi6bcwqkfvg" path="res://kloppenheim_02_puresky_2k.hdr" id="5_wof2g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3d446"]
 

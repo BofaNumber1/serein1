@@ -1,0 +1,142 @@
+[gd_scene load_steps=10 format=3 uid="uid://vatlow7v517b"]
+
+[ext_resource type="Script" uid="uid://bd2q453k1atwy" path="res://pause.gd" id="1_6eyaj"]
+[ext_resource type="FontFile" uid="uid://b7gu0baswxde2" path="res://Fonts/Gameplay.ttf" id="2_8u653"]
+[ext_resource type="Texture2D" uid="uid://y70uww6a0my5" path="res://Images/Serein.png" id="3_bwtow"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_05lnj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jg8ls"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u063c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_56vcw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m0a22"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w2ufp"]
+blend_mode = 2
+
+[node name="Pause" type="Panel"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -300.0
+offset_right = 384.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6eyaj")
+
+[node name="Resume" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -146.0
+offset_right = 264.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../Start")
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_8u653")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_05lnj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jg8ls")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u063c")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_56vcw")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m0a22")
+text = "Resume"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.0
+offset_top = 43.0
+offset_right = 266.0
+offset_bottom = 119.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../Start")
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_8u653")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_05lnj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jg8ls")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u063c")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_56vcw")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m0a22")
+text = "Quit"
+
+[node name="Settings" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -259.0
+offset_top = -53.0
+offset_right = 269.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("../Start")
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/icon_pressed_color = Color(1, 1, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_8u653")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_05lnj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_jg8ls")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u063c")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_56vcw")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m0a22")
+text = "Settings"
+
+[node name="Paused label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_top = 61.0
+offset_right = 72.0
+offset_bottom = 99.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_8u653")
+theme_override_font_sizes/font_size = 32
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="Serein2" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_w2ufp")
+position = Vector2(129, 86)
+scale = Vector2(0.24967, 0.25)
+texture = ExtResource("3_bwtow")
+
+[node name="Serein" type="Sprite2D" parent="."]
+position = Vector2(131, 84)
+scale = Vector2(0.24967, 0.25)
+texture = ExtResource("3_bwtow")
